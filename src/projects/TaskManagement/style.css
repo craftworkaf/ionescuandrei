@@ -1,0 +1,26 @@
+.addTasks{
+
+
+        display: flex;
+        flex-direction: row;
+
+}
+
+
+
+
+.tasksContainer {
+ 
+    text-align: left;
+
+}
+
+.uContainer, .cContainer{
+    text-align: left;
+    
+  
+}
+
+form{
+    height: auto;
+}

@@ -1,0 +1,121 @@
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" integrity="sha384-JcKb8q3iqJ61gNV9KGb8thSsNjpSL0n8PARn9HuZOnIxN0hoP+VmmDGMN5t9UJ0Z" crossorigin="anonymous">
+    
+    
+</head>
+<body>
+
+<div class="container-fluid " id="app">
+
+    <section class="row ">
+        <div class="col-4  " style=" border-radius: 5px; background-color: rgb(241, 240, 241);">
+            <h1 class="text-center">Add task</h1>
+                <div class="p-3">
+                    <div class="form-row">
+                    <div class="form-group col-12">
+                        <label>Task name</label>
+                        <input type="text" class="form-control" v-model="task.name" placeholder="Task name">
+                    </div>
+                    <div class="form-group col-12">
+                        <label for="comments">Comments</label>
+                        <textarea class="form-control" id="comments" v-model="task.comments" ></textarea>
+                    </div>
+                    </div>
+                
+                    <div class="form-row">
+                    <div class="form-group col-4">
+                        <label for="">Priority</label>
+                        <select class="form-control" v-model="task.priority">
+                            <option value="high">High</option>  
+                            <option value="med">Medium</option>
+                            <option value="low">Low</option>
+                        </select>
+                        </div>
+                    <div class="form-group col-4">
+                        <label for="inputState">Deadline</label>
+                        <input type="text"class="form-control" v-model="task.deadline">
+                    </div>
+                    <div class="form-group col-md-4">
+                        <label >Due date</label>
+                        <input type="date" class="form-control" v-model="task.due_date">
+                    </div>
+                    </div>
+
+                
+
+                <button class="btn btn-primary" v-on:click='getData()'>Add</button>
+                <button class="btn btn-dark float-right">Clear</button>
+        </div>
+        </div>
+
+        <div class="col-1">
+
+        </div>
+
+        <div class="col-6 " style="">
+
+            <div class="col-12 py-3" style=" border-radius: 5px; background-color: rgb(241, 240, 241);">
+               <h1 class="text-center">Uncompleted </h1> 
+                <hr>
+
+                <div class="card mt-1" v-for="(t,index) in tasks" style="border-width: 3px" v-if="t.completed==false" v-bind:class="getPriorityLevel(index)">
+                    <div class="card-body">
+                        <div class="row justify-content-between  px-2 ">
+                            
+                            <div><h4>{{t.name}}</h4></div>
+                            <div>{{t.due_date}}</div>
+                        </div>
+                      <p class="card-text">{{t.comments}}</p>
+                        <div class="row justify-content-between px-2">
+                            <button class=" btn btn-outline-success " v-on:click="toggleTask(index)">Complete</button>
+                            <div><h3>{{t.deadline}}</h3></div>
+                            <button class=" btn btn-outline-dark " v-on:click="deleteTask(index)">Delete</button>
+                        </div>
+                    </div>
+                  </div>
+
+
+            </div>
+
+            <div class="col-12 py-3 " style="border-radius: 5px; background-color: rgb(241, 240, 241);">
+                <h1 class="text-center">Completed</h1>
+                <hr>
+
+                <div class="card mt-1 " style="border-width: 3px" v-for="(t,index) in tasks" v-if="t.completed">
+                    <div class="card-body">
+                        <div class="row justify-content-between  px-2 ">
+                            
+                            <div><h4>{{t.name}}</h4></div>
+                            <div>{{t.due_date}}</div>
+                        </div>
+                      <p class="card-text">{{t.comments}}</p>
+                        <div class="row justify-content-between px-2">
+                            <button class=" btn btn-outline-info " v-on:click="toggleTask(index)">Undo</button>
+                            <div><h3>{{t.deadline}}</h3></div>
+                            <button class=" btn btn-outline-dark " v-on:click="deleteTask(index)">Delete</button>
+                        </div>
+                    </div>
+                  </div>
+
+            </div>
+
+        </div>
+    </section>
+
+</div>
+
+
+
+
+
+
+<script src="vue.js"></script>
+<script src="moment.js"></script>
+<script src="core.js"></script>
+</body>
+</html>
