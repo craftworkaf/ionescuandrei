@@ -1,0 +1,20 @@
+function calculator(){
+    var total = 0;
+    var monthly = 0;
+
+}
+
+
+
+$('#submit').click(function(){
+    
+    var house = $('#h1').val();
+    var loan = $('#l1').val();
+    var deposit = $('#d1').val();
+    var interest = $('#i1').val();
+    var years = $('#y1').val();
+
+    console.log(house)
+
+
+});
