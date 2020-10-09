@@ -5,6 +5,7 @@ var app = new Vue({
         checked: true,   
         tasks: [],
         storeStatus:'',
+        temptask : '',
         task: {
             name:'',
             comments: '',
@@ -16,6 +17,27 @@ var app = new Vue({
         }
     },
     methods:{
+
+        /**
+         * Get the working task and set its details to temptask
+         * @param {*} taskId 
+         */
+         editTask(taskId)
+        {
+            this.temptask = this.tasks[taskId]                 
+        },
+
+        /**
+         * 
+         */
+        saveTaskChanges(){
+            axios.post('https://upster.co.uk/tasks-manager/update', this.temptask).then((response)=>{
+               if(response.data){
+                   this.getTodayTasks()
+               }
+            })
+        },
+
         /**
          * Retrieving data
          */
@@ -49,19 +71,11 @@ var app = new Vue({
         toggleTask(index){
             this.tasks[index].completed = !this.tasks[index].completed
            
-            axios.post('https://upster.co.uk/tasks-manager/update',{
-                taskId: this.tasks[index].id,
-                name: this.tasks[index].name,
-                comments: this.tasks[index].comments,
-                priority: this.tasks[index].priority,
-                dueDate: this.tasks[index].due_date,
-                completed: this.tasks[index].completed,
-            }).then(result => console.log(result))
+            axios.post('https://upster.co.uk/tasks-manager/update',this.tasks[index]).then(result => console.log(result))
             
 
         },
         getPriorityLevel(index){
-            
             if(this.tasks[index].priority == 'high'){
                 return 'border-danger'
             }else if(this.tasks[index].priority == 'med'){
@@ -75,7 +89,7 @@ var app = new Vue({
             if(confirmation == false){
                 return false
             }
-            axios.post('https://upster.co.uk/tasks-manager/delete',{taskId:this.tasks[index].id}).then(result => {
+            axios.post( 'https://upster.co.uk/tasks-manager/delete',{ id : this.tasks[index].id } ).then(result => {
                     if(result.data.status == 200){
                         this.tasks.splice(index,1);
                     }
@@ -87,13 +101,7 @@ var app = new Vue({
         },
         getTodayTasks(){
             axios.get('https://upster.co.uk/tasks-manager/today').then(result => {
-                var x = result.data
-                
-
-            for(var i = 0; i<x.length;i++){
-                this.tasks.push(x[i]);
-                console.log(x[i])
-            }
+             this.tasks=result.data
             })
         }
 

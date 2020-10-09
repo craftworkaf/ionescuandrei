@@ -5,9 +5,10 @@
     <title>Document</title>
     <link rel="stylesheet" href="style.css">
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" integrity="sha384-JcKb8q3iqJ61gNV9KGb8thSsNjpSL0n8PARn9HuZOnIxN0hoP+VmmDGMN5t9UJ0Z" crossorigin="anonymous">
-    <link href="https://gitcdn.github.io/bootstrap-toggle/2.2.2/css/bootstrap-toggle.min.css" rel="stylesheet">
-    <script src="https://gitcdn.github.io/bootstrap-toggle/2.2.2/js/bootstrap-toggle.min.js"></script>
-    
+    <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
+        
 </head>
 <body>
 
@@ -62,25 +63,27 @@
         <div class="col-6 " style="">
 
             <div class="col-12 py-3" style=" border-radius: 5px; background-color: rgb(241, 240, 241);">
-               <h1 class="text-center">Uncompleted </h1> 
+               <h3 class='p-2'>Uncompleted </h3> 
                 <hr>
 
                 <div class="card mt-1" v-for="(t,index) in tasks" style="border-width: 3px" v-if="t.completed==false" v-bind:class="getPriorityLevel(index)">
                     <div class="card-body">
                         <div class="row justify-content-between  px-2 ">
-                            
-                            <div><h4>{{t.name}}</h4></div>
-                            <div>{{t.due_date}}</div>
+                            <button 
+                            style="max-height: 35px;" 
+                            class="btn btn-outline-dark" 
+                            v-on:click="editTask(index)"  data-toggle="modal" data-target="#exampleModal">Edit</button>
+                            <div class='p-2'><h4>{{t.name}}</h4></div>
+                            <div class="p-2">{{t.due_date}}</div>
                         </div>
-                      <p class="card-text">{{t.comments}}</p>
-                        <div class="row justify-content-between px-2">
+                      <p class="card-text bg-light p-2">{{t.comments}}</p>
+                        <div class="row justify-content-between p-2">
                             <button class=" btn btn-outline-success " v-on:click="toggleTask(index)">Complete</button>
                             <div><h3>{{t.deadline}}</h3></div>
                             <button class=" btn btn-outline-dark " v-on:click="deleteTask(index)">Delete</button>
                         </div>
                     </div>
                   </div>
-
 
             </div>
 
@@ -89,9 +92,9 @@
                 
                 <div class="row align-items-center justify-content-around">
 
+                    
+                    <h3 class="col-10 p-2"> Completed</h3>
                     <label class="switch "> <input type="checkbox" v-model="checked"> <span class="slider"></span> </label>
-                    <h1 class="text-center col-10 py-1"> Completed</h1>
-
                 </div>
                 <hr>
                 <div v-show="checked">
@@ -115,14 +118,62 @@
 
         </div>
     </section>
+<!-- modal   -->
 
+
+  
+  <!-- Modal -->
+  <div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog" role="document">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title" id="exampleModalLabel">Modal title</h5>
+          <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+            <span aria-hidden="true">&times;</span>
+          </button>
+        </div>
+        <div class="modal-body">
+          <!-- --- -->
+          <div class="form-row">
+            <div class="form-group col-12">
+                <label>Task name</label>
+                <input type="text" class="form-control" v-model="temptask.name" placeholder="Task name">
+            </div>
+            <div class="form-group col-12">
+                <label for="comments">Comments</label>
+                <textarea class="form-control" v-model="temptask.comments" ></textarea>
+            </div>
+            </div>
+        
+            <div class="form-row">
+            <div class="form-group col-4">
+                <label for="">Priority</label>
+                <select class="form-control" v-model="temptask.priority">
+                    <option value="high">High</option>  
+                    <option value="med">Medium</option>
+                    <option value="low">Low</option>
+                </select>
+                </div>
+            <div class="form-group col-4">
+                <label for="inputState">Deadline</label>
+                <input type="text"class="form-control" v-model="temptask.deadline">
+            </div>
+            <div class="form-group col-md-4">
+                <label >Due date</label>
+                <input type="date" class="form-control" v-model="temptask.due_date">
+            </div>
+            </div>
+          <!-- --- -->
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancel</button>
+          <button type="button" class="btn btn-primary"  v-on:click="saveTaskChanges()" data-dismiss="modal">Save changes</button>
+        </div>
+      </div>
+    </div>
+  </div>
 </div>
-
-
-
-
-
-
+<!-- modal -->
 <script src="vue.js"></script>
 <script src="moment.js"></script>
 <script src="axios.js"></script>
