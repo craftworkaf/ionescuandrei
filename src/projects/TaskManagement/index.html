@@ -5,7 +5,8 @@
     <title>Document</title>
     <link rel="stylesheet" href="style.css">
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" integrity="sha384-JcKb8q3iqJ61gNV9KGb8thSsNjpSL0n8PARn9HuZOnIxN0hoP+VmmDGMN5t9UJ0Z" crossorigin="anonymous">
-    
+    <link href="https://gitcdn.github.io/bootstrap-toggle/2.2.2/css/bootstrap-toggle.min.css" rel="stylesheet">
+    <script src="https://gitcdn.github.io/bootstrap-toggle/2.2.2/js/bootstrap-toggle.min.js"></script>
     
 </head>
 <body>
@@ -51,6 +52,7 @@
                 <button class="btn btn-primary" v-on:click='getData()'>Add</button>
                 <button class="btn btn-dark float-right">Clear</button>
         </div>
+        
         </div>
 
         <div class="col-1">
@@ -83,25 +85,32 @@
             </div>
 
             <div class="col-12 py-3 " style="border-radius: 5px; background-color: rgb(241, 240, 241);">
-                <h1 class="text-center">Completed</h1>
+                
+                
+                <div class="row align-items-center justify-content-around">
+
+                    <label class="switch "> <input type="checkbox" v-model="checked"> <span class="slider"></span> </label>
+                    <h1 class="text-center col-10 py-1"> Completed</h1>
+
+                </div>
                 <hr>
-
-                <div class="card mt-1 " style="border-width: 3px" v-for="(t,index) in tasks" v-if="t.completed">
-                    <div class="card-body">
-                        <div class="row justify-content-between  px-2 ">
-                            
-                            <div><h4>{{t.name}}</h4></div>
-                            <div>{{t.due_date}}</div>
+                <div v-show="checked">
+                    <div class="card mt-1 " style="border-width: 3px" v-for="(t,index) in tasks" v-if="t.completed">
+                            <div class="card-body">
+                                <div class="row justify-content-between  px-2 ">
+                                    
+                                    <div><h4>{{t.name}}</h4></div>
+                                    <div>{{t.due_date}}</div>
+                                </div>
+                            <p class="card-text">{{t.comments}}</p>
+                                <div class="row justify-content-between px-2">
+                                    <button class=" btn btn-outline-info " v-on:click="toggleTask(index)">Undo</button>
+                                    <div><h3>{{t.deadline}}</h3></div>
+                                    <button class=" btn btn-outline-dark " v-on:click="deleteTask(index)">Delete</button>
+                                </div>
+                            </div>
                         </div>
-                      <p class="card-text">{{t.comments}}</p>
-                        <div class="row justify-content-between px-2">
-                            <button class=" btn btn-outline-info " v-on:click="toggleTask(index)">Undo</button>
-                            <div><h3>{{t.deadline}}</h3></div>
-                            <button class=" btn btn-outline-dark " v-on:click="deleteTask(index)">Delete</button>
-                        </div>
-                    </div>
-                  </div>
-
+                </div>
             </div>
 
         </div>
@@ -116,6 +125,7 @@
 
 <script src="vue.js"></script>
 <script src="moment.js"></script>
+<script src="axios.js"></script>
 <script src="core.js"></script>
 </body>
 </html>

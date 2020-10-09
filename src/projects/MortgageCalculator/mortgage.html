@@ -7,51 +7,39 @@
     
 </head>
 <body>
-    
-    <table>
-
-        <tr>
-            <td>House cost:</td><td><input type="number" id="h1"/></td>
-        </tr>
-
-        <tr>
-            <td>Deposit:</td><td><input type="number" id="d1" /></td>
-        </tr>
-
-        <tr>
-            <td>Interest:</td><td><input type="number" id="i1" /></td>
-        </tr>
-
-        <tr>
-            <td>Years of payment:</td><td><input type="number" id="y1" /></td>
-        </tr>
+    <div class="container" >
+        <div class="box">
         
-    </table>
+                <div class="inputField">
 
-    <br>
-    <button id="submit">Submit</button>
-    <br><br>
-    <br>
-    <button id="clear">Clear</button>
-    <br>
+                    <input class="inputs" type="number" id="h1" placeholder="House cost">
 
-    <table>
+                    <input class="inputs" type="number" id="d1" placeholder="Deposit ammount">
 
-        <tr>
-            <td>Loan ammount:</td><td><input type="number" id="l1" /></td>
-        </tr>
+                    <input class="inputs" type="number" id="i1" placeholder="Interest rate (%)">
 
-        <tr>
-            <td>Total cost is:</td><td><input type="number" id="t1" /></td>
-        </tr>
+                    <input class="inputs" type="number" id="y1" placeholder="Number of Years" >
+                </div>  
+               
+                <br>
+                <div class="buttonRow">
+                    <button id="submit">Submit</button>
+                    <button id="clear">Clear</button>
+                </div> 
+                <br>
+                <div class="results">
+                    <table>
+                        <tr> <td>Loan ammount:</td> <td> <input type="number" id="l1" > </td> </tr>
 
-        <tr>
-            <td>Monthly cost is:</td><td><input type="number" id="m1" /></td>
-        </tr>
+                        <tr> <td>Total cost:</td> <td> <input type="number" id="t1" ></td> </tr>
 
-    </table>
+                        <tr> <td>Monthly cost:</td> <td>  <input type="number" id="m1" > </td> </tr>
+                    </table>
+                </div>
 
-        incearca sa pui clear pe escape si sa faci tab din enter
+        </div>
+    </div>
+        <!-- incearca sa pui clear pe escape si sa faci tab din enter -->
 
     <script src="https://code.jquery.com/jquery-3.5.1.js" integrity="sha256-QWo7LDvxbWT2tbbQ97B53yJnYU3WhH/C8ycbRAkjPDc=" crossorigin="anonymous"></script>
     <script src="mortgage.js"></script>
