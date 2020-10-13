@@ -37,7 +37,7 @@ $('#login').click(function(){
 
     $.post(url,{  
 
-        name: user.val(),
+        user: user.val(),
         password : password.val()
 
     }).done(function(response){
@@ -47,6 +47,7 @@ $('#login').click(function(){
         if(response.status == 200){
 
             localStorage.setItem('token', response.token)
+            localStorage.setItem('userName', response.userName)
             window.location.assign('addItems.html')
 
         }else if ( response.status == 401 ){
@@ -96,6 +97,15 @@ user.keyup(function(){
 
 
 
+$(document).ready(function(){
+
+    if(localStorage.getItem('token')){
+
+        window.location.assign('addItems.html')
+
+    };
+
+});
 
 
 

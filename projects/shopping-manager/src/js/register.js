@@ -22,8 +22,9 @@ $('#regUser').click(function(){
 
                 if(response.status === 200){
 
-                    localStorage.setItem('token', response.token)
-                   // window.location.assign('../src/addItems.html')
+                    localStorage.setItem('token', response.token);
+                    localStorage.setItem('userName', response.userName)
+                    window.location.assign('addItems.html')
 
                 }else(
                     console.log(response)

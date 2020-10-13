@@ -3,9 +3,13 @@ import {links} from './helper.js'
 
 $(document).ready(function(){
 
-  if(  !localStorage.getItem('token') ){
+    $('.userName').text('Hello ' + localStorage.getItem('userName') )
+
+    if(  !localStorage.getItem('token') ){
 
     window.location.assign('index.html')
+
+    
 
   }
 
@@ -142,3 +146,4 @@ $('#logOut').click( function(){
     window.location.assign('../index.html')
 
 })
+
