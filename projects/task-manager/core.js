@@ -13,7 +13,7 @@ var app = new Vue({
             deadline: '',
             due_date: '',
             completed: false,
-            token:'',
+            token:localStorage.getItem('token'),
         },
         
     },
@@ -52,6 +52,9 @@ var app = new Vue({
               this.storeStatus = this.task.priority;
               this.clearData()
         },
+        /**
+         * Clears the form
+         */
         clearData(){
 
             this.task= {
@@ -61,7 +64,7 @@ var app = new Vue({
                 deadline: '',
                 due_date: '',
                 completed: false,
-                token:'',
+                token : localStorage.getItem('token'),
     
             }
         },
@@ -101,7 +104,7 @@ var app = new Vue({
 
         },
         getTodayTasks(){
-            axios.post('https://upster.co.uk/tasks-manager/today',{token: this.task.token}).then(result => {
+            axios.post('https://upster.co.uk/tasks-manager/today',{token: localStorage.getItem('token')}).then(result => {
              this.tasks=result.data
             })
         }
@@ -121,15 +124,12 @@ var app = new Vue({
         }
     },
     mounted(){
-
         this.getTodayTasks()
-        
     },
     created(){
         if(!localStorage.getItem('token')){
             window.location.assign('index.html')
         }
-        this.task.token = localStorage.getItem('token')
     }
 
 
