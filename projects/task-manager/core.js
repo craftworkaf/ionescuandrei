@@ -90,7 +90,7 @@ var app = new Vue({
             if(confirmation == false){
                 return false
             }
-            axios.post( 'https://upster.co.uk/tasks-manager/delete',{ id : this.tasks[index].id } ).then(result => {
+            axios.post( 'https://upster.co.uk/tasks-manager/delete',this.tasks[index] ).then(result => {
                     if(result.data.status == 200){
                         this.tasks.splice(index,1);
                     }
@@ -101,7 +101,7 @@ var app = new Vue({
 
         },
         getTodayTasks(){
-            axios.get('https://upster.co.uk/tasks-manager/today',{token: this.task.token}).then(result => {
+            axios.post('https://upster.co.uk/tasks-manager/today',{token: this.task.token}).then(result => {
              this.tasks=result.data
             })
         }
@@ -109,16 +109,7 @@ var app = new Vue({
 
     },
     computed:{
-        // border(){
-
-        //     if(this.task.priority == 'high'){
-        //         return 'border-danger'
-        //     }else if(this.task.priority == 'med'){
-        //         return 'border-warning'
-        //     }else if(this.task.priority == 'low'){
-        //         return 'border-success'
-        //     }
-        // },
+       
         danger(){
             return this.storeStatus == 'high'
         },
@@ -135,6 +126,9 @@ var app = new Vue({
         
     },
     created(){
+        if(!localStorage.getItem('token')){
+            window.location.assign('index.html')
+        }
         this.task.token = localStorage.getItem('token')
     }
 
