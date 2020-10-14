@@ -12,9 +12,10 @@ var app = new Vue({
             priority: '',
             deadline: '',
             due_date: '',
-            completed: false
-
-        }
+            completed: false,
+            token:'',
+        },
+        
     },
     methods:{
 
@@ -59,8 +60,8 @@ var app = new Vue({
                 priority: '',
                 deadline: '',
                 due_date: '',
-                completed: false
-
+                completed: false,
+                token:'',
     
             }
         },
@@ -100,7 +101,7 @@ var app = new Vue({
 
         },
         getTodayTasks(){
-            axios.get('https://upster.co.uk/tasks-manager/today').then(result => {
+            axios.get('https://upster.co.uk/tasks-manager/today',{token: this.task.token}).then(result => {
              this.tasks=result.data
             })
         }
@@ -131,7 +132,10 @@ var app = new Vue({
     mounted(){
 
         this.getTodayTasks()
-
+        
+    },
+    created(){
+        this.task.token = localStorage.getItem('token')
     }
 
 
