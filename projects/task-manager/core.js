@@ -107,6 +107,10 @@ var app = new Vue({
             axios.post('https://upster.co.uk/tasks-manager/today',{token: localStorage.getItem('token')}).then(result => {
              this.tasks=result.data
             })
+        },
+        logOut(){
+            localStorage.clear();
+            window.location.assign('index.html')
         }
 
 
@@ -136,3 +140,4 @@ var app = new Vue({
   })
 
 
+ 

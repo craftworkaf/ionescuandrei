@@ -10,15 +10,16 @@
     <div class="container-fluid ">
         <div class="row" style=" height: 100vh;">
             <div class=" col-3 bg-info justify-content-center align-items-center d-flex " >
-                <div id="loginPanel" class="d-flex flex-column lefutpecapota">
+                <div id="registerPanel" class="d-flex flex-column lefutpecapota">
 
-                    <input class="my-1 form-control-lg " type="text" placeholder="Username"  >
+                    <input v-model="user" class="my-1 form-control-lg " type="text" placeholder="Username"  >
                   
-                    <input class="my-1 form-control-lg " type="password" placeholder="Password">
+                    <input v-model="pass" class="my-1 form-control-lg " type="password" placeholder="Password">
                     
-                    <input class="my-1 form-control-lg" type="password" placeholder="Confirm password">
+                    <input v-model="confirmPass"  class="my-1 form-control-lg" type="password" placeholder="Confirm password">
                     
-                    <button class="my-1 btn btn-dark btn-lg btn-block ">Register</button>
+                    <button v-on:click="registerDetails()" class="my-1 btn btn-dark btn-lg btn-block ">Register</button>
+                    <button class="my-1 btn btn-dark btn-lg btn-block ">Back to Login</button>
                     
                     </div>   
             </div>  
@@ -31,7 +32,7 @@
 
 <script src="vue.js"></script>
 <script src="axios.js"></script>
-<script src="login.js"></script>
+<script src="register.js"></script>
 
 </body>
 </html>
