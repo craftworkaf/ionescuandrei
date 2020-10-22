@@ -1,0 +1,119 @@
+body{
+    /* overflow: hidden; */
+}
+
+.card:hover{
+transition-duration: 0.3s;
+-webkit-box-shadow: 0px 0px 5px 2px rgba(189,176,189,1);
+-moz-box-shadow: 0px 0px 5px 2px rgba(189,176,189,1);
+box-shadow: 0px 0px 5px 2px rgba(189,176,189,1);
+}
+
+.btn{
+    border-radius: 0!important;
+}
+
+
+
+
+
+.addTask{
+    position:absolute!important;
+    z-index: 999;
+    display: none;
+
+}
+
+
+.dimmer{
+    height: 100vh;
+    width:100vw;
+    background-color: rgba(0,0,0,0.5);
+    position: absolute!important;
+    z-index: 99;
+    display: none;
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+.switch {
+    position: relative;
+    display: inline-block;
+    width: 60px;
+    height: 25px;
+  }
+  
+  .switch input { 
+    opacity: 0;
+    width: 0;
+    height: 0;
+  }
+  
+  .slider {
+    position: absolute;
+    cursor: pointer;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background-color: #ccc;
+    -webkit-transition: .4s;
+    transition: .4s;
+  }
+  
+  .slider:before {
+    position: absolute;
+    content: "";
+    height: 17px;
+    width: 26px;
+    left: 4px;
+    bottom: 4px;
+    background-color: white;
+    -webkit-transition: .4s;
+    transition: .4s;
+  }
+  
+  input:checked + .slider {
+    background-color: #2196F3;
+  }
+  
+  input:focus + .slider {
+    box-shadow: 0 0 1px #2196F3;
+  }
+  
+  input:checked + .slider:before {
+    -webkit-transform: translateX(26px);
+    -ms-transform: translateX(26px);
+    transform: translateX(26px);
+  }
+  
+  /* Rounded sliders */
+  .slider.round {
+    border-radius: 34px;
+  }
+  
+  .slider.round:before {
+    border-radius: 50%;
+  }

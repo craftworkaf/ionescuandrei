@@ -51,6 +51,7 @@ var app = new Vue({
               });
               this.storeStatus = this.task.priority;
               this.clearData()
+              $('.bd-example-modal-lg').modal('hide')
         },
         /**
          * Clears the form
@@ -140,4 +141,3 @@ var app = new Vue({
   })
 
 
- 

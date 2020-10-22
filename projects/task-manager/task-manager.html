@@ -3,7 +3,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Document</title>
-    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="task-manager-style.css">
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" integrity="sha384-JcKb8q3iqJ61gNV9KGb8thSsNjpSL0n8PARn9HuZOnIxN0hoP+VmmDGMN5t9UJ0Z" crossorigin="anonymous">
     <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
@@ -11,13 +11,25 @@
         
 </head>
 <body>
+    
 
-<div class="container-fluid " id="app">
+<nav class="navbar navbar-dark bg-dark" style="padding: 0px;">
 
-    <div class="col-12"> <button v-on:click="logOut()" class="my-1 btn btn-dark">Logout</button> </div>
+    <button v-on:click="logOut()" class="my-1 btn btn-dark">Logout</button>
+        
+</nav>
 
-    <section class="row ">
-        <div class="col-4  " style=" border-radius: 5px; background-color: rgb(241, 240, 241);">
+
+<div class="container-fluid" id="app">
+
+    <section class="row my-4 " > 
+        <div class="col-1">
+            <button  data-toggle="modal" data-target=".bd-example-modal-lg"  class="btn btn-lg btn-block btn-primary">Add Tasks</button>
+        </div>
+    </section>
+    <section class="row mt-3">
+
+        <div class="col-4 addTask " style=" border-radius: 5px; background-color: rgb(241, 240, 241);">
             <h1 class="text-center">Add task</h1>
                 <div class="p-3">
                     <div class="form-row">
@@ -58,38 +70,45 @@
         
         </div>
 
-        <div class="col-1">
+        <div class="col-1"></div>
+        <div class="col-10 " >
 
-        </div>
+            <div class="row justify-content-around" style=" border-radius: 5px; ">
+               
+                
 
-        <div class="col-6 " style="">
-
-            <div class="col-12 py-3" style=" border-radius: 5px; background-color: rgb(241, 240, 241);">
-               <h3 class='p-2'>Uncompleted </h3> 
-                <hr>
-
-                <div class="card mt-1" v-for="(t,index) in tasks" style="border-width: 3px" v-if="t.completed==false" v-bind:class="getPriorityLevel(index)">
-                    <div class="card-body">
-                        <div class="row justify-content-between  px-2 ">
-                            <button 
-                            style="max-height: 35px;" 
-                            class="btn btn-outline-dark" 
-                            v-on:click="editTask(index)"  data-toggle="modal" data-target="#exampleModal">Edit</button>
-                            <div class='p-2'><h4>{{t.name}}</h4></div>
-                            <div class="p-2">{{t.due_date}}</div>
-                        </div>
-                      <p class="card-text bg-light p-2">{{t.comments}}</p>
-                        <div class="row justify-content-between p-2">
-                            <button class=" btn btn-outline-success " v-on:click="toggleTask(index)">Complete</button>
-                            <div><h3>{{t.deadline}}</h3></div>
-                            <button class=" btn btn-outline-dark " v-on:click="deleteTask(index)">Delete</button>
-                        </div>
+                <div class="card m-3" v-for="(t,index) in tasks" style="width:23%;border-width: 10px; border-bottom: none;border-left:none;border-right:none;border-radius: 0;" v-if="t.completed==false" v-bind:class="getPriorityLevel(index)">
+                    <div class="p-3 row">
+                        
+                       <div style="font-weight: bold;" class="col-12 text-center mb-1"> {{t.name}}</div>
+                       <br>
+                       <div class="col-6 text-left">{{t.deadline}}</div>
+                       <div class="col-6 text-right">{{t.due_date}}</div>
                     </div>
+
+                    <div class="card-body" style="height:150px; overflow:hidden;" >
+                        <p class="card-text bg-light p-2" style="font-size: 14px;">{{t.comments}}</p>
+                    </div>
+                      
+                        <div class="card-footer py-0" style="background:none;border:none;">
+                            <div class="row">  
+                           <div class="col-4 p-0"> <button class=" btn btn-outline-success btn-block" v-on:click="toggleTask(index)">Complete</button></div>
+                            
+                           <div class="col-4 p-0"> 
+                                <button 
+                                    class="btn btn-outline-warning btn-block" 
+                                    v-on:click="editTask(index)"  data-toggle="modal" data-target="#exampleModal">Edit</button>
+                            </div>
+
+                            <div class="col-4 p-0">  <button class=" btn btn-outline-dark btn-block " v-on:click="deleteTask(index)">Delete</button></div>
+                            </div>
+                        </div>  
+                    
                   </div>
 
             </div>
 
-            <div class="col-12 py-3 " style="border-radius: 5px; background-color: rgb(241, 240, 241);">
+            <div class="col-12 py-3 " style="border-radius: 5px; ">
                 
                 
                 <div class="row align-items-center justify-content-around">
@@ -119,6 +138,10 @@
             </div>
 
         </div>
+
+
+
+
     </section>
 <!-- modal   -->
 
@@ -174,8 +197,71 @@
       </div>
     </div>
   </div>
+
+<!-- addTask modal -->
+
+
+  <div class="modal fade bd-example-modal-lg" tabindex="-1" role="dialog" aria-labelledby="myLargeModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-lg">
+      <div class="modal-content">
+        <h1 class="text-center">Add task</h1>
+        <div class="p-3">
+            <div class="form-row">
+            <div class="form-group col-12">
+                <label>Task name</label>
+                <input type="text" class="form-control" v-model="task.name" placeholder="Task name">
+            </div>
+            <div class="form-group col-12">
+                <label for="comments">Comments</label>
+                <textarea class="form-control" id="comments" v-model="task.comments" ></textarea>
+            </div>
+            </div>
+        
+            <div class="form-row">
+            <div class="form-group col-4">
+                <label for="">Priority</label>
+                <select class="form-control" v-model="task.priority">
+                    <option value="high">High</option>  
+                    <option value="med">Medium</option>
+                    <option value="low">Low</option>
+                </select>
+                </div>
+            <div class="form-group col-4">
+                <label for="inputState">Deadline</label>
+                <input type="text"class="form-control" v-model="task.deadline">
+            </div>
+            <div class="form-group col-md-4">
+                <label >Due date</label>
+                <input type="date" class="form-control" v-model="task.due_date">
+            </div>
+            </div>
+
+        
+
+        <button class="btn btn-primary" v-on:click='getData()'>Add</button>
+        <button v-on:click="clearData()" class="btn btn-dark float-right">Clear</button>
+      </div>
+    </div>
+  </div>
+</div>
+
+
 </div>
 <!-- modal -->
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 <script src="vue.js"></script>
 <script src="moment.js"></script>
 <script src="axios.js"></script>

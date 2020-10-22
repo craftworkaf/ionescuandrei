@@ -7,28 +7,31 @@
     <link rel="stylesheet" href="style.css">
 </head>
 <body>
-    <div class="container-fluid ">
-        <div class="row" style=" height: 100vh;">
-            <div class=" col-3 bg-info justify-content-center align-items-center d-flex">
-                <div id="loginPanel" class="d-flex flex-column lefutpecapota">
+    <div class="container-fluid background" style="padding:0px;overflow:hidden;">
+        <div class="container-fluid " style="background-color: rgba(0,0,0,0.4); margin:0px;padding:0px;">
+            <div class="row" style=" height: 100vh;"> 
+                <div class="col-4"></div>
+                <div class=" col-4 justify-content-center align-items-center d-flex">
+                    <div id="loginPanel" class="d-flex flex-column size">
 
-                    <input v-model="user" class="form-control-lg" type="text" placeholder="Username">
-                  
-                    <input v-model="password" class="form-control-lg my-1" type="password" placeholder="Password">
-                    
-                    <button v-on:click="getLoginData()" class="btn btn-secondary btn-lg">Login</button>
-                    
-                    <button onclick="window.location.href='register.html'" class="btn btn-dark my-1 btn-lg">Register</button>
-                    
-                    <a href="" class="text-white">Forgot password</a>
+                        <h1>Task Manager</h1>
 
-                </div>   
-            </div>  
+                        <input v-model="user" class="form-control-lg" type="text" placeholder="Username">
+                        <br>
+                        <input v-model="password" class="form-control-lg my-1" type="password" placeholder="Password">
+                        
+                        <button v-on:click="getLoginData()" class="btn btn-lg loginButton">Login</button>
+                        
+                        <!-- <button onclick="window.location.href='register.html'" class="btn btn-dark my-1 btn-lg">Register</button>
+                        -->
+                        <a href="" class="text-white">Forgot password</a>
 
-            <div class="col-9 erupatingura">
-               
-            </div>
-      </div>
+                    </div>   
+                </div>  
+
+                
+        </div>
+    </div>
 </div>
 
 <script src="vue.js"></script>
