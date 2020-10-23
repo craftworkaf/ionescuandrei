@@ -16,38 +16,47 @@
 
 
 
-<div class="container-fluid" id="app">
-    <nav class="navbar navbar-dark bg-dark" style="padding: 0px;">
+<div class="container-fluid p-0" id="app">
 
+
+    <!-- navbar -->
+    <nav class="navbar navbar-dark bg-dark" style="padding: 0px;">
         <button v-on:click="logOut()" class="my-1 btn btn-dark">Logout</button>
-            
     </nav>
     <section class="row my-4 " > 
+        <!-- spacer -->
+        <div class="col-1"></div>
         <div class="col-1">
-            <button  data-toggle="modal" data-target=".bd-example-modal-lg"  class="btn btn-lg btn-primary">Add Tasks</button>
+            <button data-toggle="tooltip" data-placement="top" title="Create a new task" data-toggle="modal" data-target=".bd-example-modal-lg"  class="btn btn-lg btn-primary">Add Tasks</button>
+        </div>
+        <!-- Task Filter -->
+        <div class="col-10">
+            <h2>Filter</h2>
         </div>
     </section>
-    
+    <!-- navbar end -->
+
+
+
+    <!-- TASKS -->
     <section class="row mt-3">
-
-       
+        <!-- spacer -->
         <div class="col-1"></div>
-        <div class="col-10 " >
+         <!-- tasks container -->
+        <div class="col-10">
 
-            <div class="row justify-content-around" style=" border-radius: 5px; ">
-               
-                
-
+            <!-- uncompleted tasks -->
+            <div class="row " style=" border-radius: 5px; ">
                 <div class="card m-3" v-for="(t,index) in tasks"  v-if="t.completed==false" v-bind:class="getPriorityLevel(index)">
                     <div class="p-3 row">
                         
-                       <div style="font-weight: bold;" class="col-12 text-center mb-1"> {{t.name}}</div>
+                       <div data-toggle="tooltip" data-placement="top" title="Task name" style="font-weight: bold;" class="col-12 text-center mb-1"> {{t.name}}</div>
                        <br>
-                       <div class="col-6 text-left">{{t.deadline}}</div>
-                       <div class="col-6 text-right">{{t.due_date}}</div>
+                       <div data-toggle="tooltip" data-placement="top" title="Should be completed by" class="col-6 text-left">{{t.deadline}}</div>
+                       <div data-toggle="tooltip" data-placement="top" title="Date to be completed by" class="col-6 text-right">{{t.due_date}}</div>
                     </div>
 
-                    <div class="card-body mb-3" style="height:150px; overflow:hidden;" >
+                    <div data-toggle="tooltip" data-placement="top" title="Comments" class="card-body mb-3"  >
                         <p class="card-text bg-light p-2" style="font-size: 14px;">{{t.comments}}</p>
                     </div>
                       
@@ -68,37 +77,34 @@
                   </div>
 
             </div>
-
-            <div class="col-12 py-3 " style="border-radius: 5px; ">
-                
-                
-                <div class="row align-items-center justify-content-around">
-
-                    
+            <br>
+            
+           <!--completed tasks -->
+                            
+                <div class="row justify-content-around">
                     <h3 class="col-10 p-2"> Completed</h3>
                     <label class="switch "> <input type="checkbox" v-model="checked"> <span class="slider"></span> </label>
-                </div>
-                <hr>
-                <div v-show="checked">
-                    <div class="card mt-1 " style="border-width: 3px" v-for="(t,index) in tasks" v-if="t.completed">
-                            <div class="card-body">
-                                <div class="row justify-content-between  px-2 ">
-                                    
-                                    <div><h4>{{t.name}}</h4></div>
-                                    <div>{{t.due_date}}</div>
-                                </div>
-                            <p class="card-text">{{t.comments}}</p>
-                                <div class="row justify-content-between px-2">
-                                    <button class=" btn btn-outline-info " v-on:click="toggleTask(index)">Undo</button>
-                                    <div><h3>{{t.deadline}}</h3></div>
-                                    <button class=" btn btn-outline-dark " v-on:click="deleteTask(index)">Delete</button>
-                                </div>
+                <div v-show="checked" class="row" style="width: 100%;">
+                    <div class="card m-3"  v-for="(t,index) in tasks" v-if="t.completed">
+
+                        <div class="p-3 row">
+                            <div style="font-weight: bold;" class="col-12 text-center mb-1"> {{t.name}}</div>
+                            <br>
+                            <div class="col-6 text-left">{{t.deadline}}</div>
+                            <div class="col-6 text-right">{{t.due_date}}</div>
+                         </div>
+                         <div class="card-body mb-3"  >
+                            <p class="card-text bg-light p-2" style="font-size: 14px;">{{t.comments}}</p>
+                        </div>
+                            <div class="footer">
+                                <button class=" btn btn-outline-info " v-on:click="toggleTask(index)">Undo</button>
+                                <button class=" btn btn-outline-dark " v-on:click="deleteTask(index)">Delete</button>
                             </div>
                         </div>
+                    </div>
                 </div>
             </div>
-
-        </div>
+         
 
 
 
@@ -214,7 +220,13 @@
 
 
 
+<script>
+    
+    $(function () {
+  $('[data-toggle="tooltip"]').tooltip()
+})
 
+</script>
 
 <script src="vue.js"></script>
 <script src="moment.js"></script>

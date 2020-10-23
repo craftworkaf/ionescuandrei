@@ -9,20 +9,27 @@ body{
   border-left:none!important;
   border-right:none!important;
   border-radius: 0!important;
-
+  min-width: 20%!important;
 
   -webkit-box-shadow: 0px 1px 1px 1px rgba(232,232,232,1);
   -moz-box-shadow: 0px 1px 1px 1px rgba(232,232,232,1);
   box-shadow: 0px 1px 1px 1px rgba(232,232,232,1);
+
+}
+
+
+.card-body{
+  height:150px; 
+  overflow:hidden;
 }
 
 
 
 .card:hover{
-transition-duration: 0.3s;
--webkit-box-shadow: 0px 0px 5px 2px rgba(189,176,189,1);
--moz-box-shadow: 0px 0px 5px 2px rgba(189,176,189,1);
-box-shadow: 0px 0px 5px 2px rgba(189,176,189,1);
+  transition-duration: 0.3s;
+  -webkit-box-shadow: 0px 0px 5px 2px rgba(189,176,189,1);
+  -moz-box-shadow: 0px 0px 5px 2px rgba(189,176,189,1);
+  box-shadow: 0px 0px 5px 2px rgba(189,176,189,1);
 }
 
 .btn{
