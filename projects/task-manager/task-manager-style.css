@@ -2,6 +2,22 @@ body{
     /* overflow: hidden; */
 }
 
+.card{
+  width:20%!important;
+  border-width: 10px!important; 
+  border-bottom: none!important;
+  border-left:none!important;
+  border-right:none!important;
+  border-radius: 0!important;
+
+
+  -webkit-box-shadow: 0px 1px 1px 1px rgba(232,232,232,1);
+  -moz-box-shadow: 0px 1px 1px 1px rgba(232,232,232,1);
+  box-shadow: 0px 1px 1px 1px rgba(232,232,232,1);
+}
+
+
+
 .card:hover{
 transition-duration: 0.3s;
 -webkit-box-shadow: 0px 0px 5px 2px rgba(189,176,189,1);
@@ -11,40 +27,8 @@ box-shadow: 0px 0px 5px 2px rgba(189,176,189,1);
 
 .btn{
     border-radius: 0!important;
+    font-size: 14px!important;
 }
-
-
-
-
-
-.addTask{
-    position:absolute!important;
-    z-index: 999;
-    display: none;
-
-}
-
-
-.dimmer{
-    height: 100vh;
-    width:100vw;
-    background-color: rgba(0,0,0,0.5);
-    position: absolute!important;
-    z-index: 99;
-    display: none;
-}
-
-
-
-
-
-
-
-
-
-
-
-
 
 
 
