@@ -14,19 +14,27 @@ body{
     background-color: rgb(79, 122, 187);
     font-size: 20px;
     padding: 12px 40px;
-    border: 1px solid black;
-    border-radius: 5px;
+    border-radius:3px;
     margin: auto;
     
   
 }
+
+#submit:hover{
+    background-color: rgb(56, 87, 134);
+}
+#clear:hover{
+    background-color: rgb(56, 87, 134);
+}
+
 .box {
     padding-top: 30px;
     background-color: silver;
     width: 350px;
     height: 430px;
-    border-radius: 10px;
+    border-radius: 5px;
     margin-top: 10%;
+    
     
 }
 
@@ -53,6 +61,7 @@ input {
 
 .results{
     margin-left:10px;
+    color:white
 }
 
 .results input{

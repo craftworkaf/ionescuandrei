@@ -6,6 +6,11 @@ var app = new Vue({
         tasks: [],
         storeStatus:'',
         temptask : '',
+        filterBy :{
+            date:'',
+            taskName:'',
+            taskComment:'',
+        },
         task: {
             name:'',
             comments: '',
@@ -34,7 +39,7 @@ var app = new Vue({
         saveTaskChanges(){
             axios.post('https://upster.co.uk/tasks-manager/update', this.temptask).then((response)=>{
                if(response.data){
-                   this.getTodayTasks()
+                   this.getTasks()
                }
             })
         },
@@ -90,7 +95,7 @@ var app = new Vue({
             }
         },
         deleteTask(index){
-            var confirmation = confirm('Are you suuure ?');
+            var confirmation = confirm('Are you sure ?');
             if(confirmation == false){
                 return false
             }
@@ -101,23 +106,28 @@ var app = new Vue({
                }
            )
           
-           
-
+        
         },
-        getTodayTasks(){
-            axios.post('https://upster.co.uk/tasks-manager/today',{token: localStorage.getItem('token')}).then(result => {
+        getAllTasks(){
+            axios.post('https://upster.co.uk/tasks-manager/allTasks',{token: localStorage.getItem('token')}).then(result => {
+             this.tasks=result.data}
+        )
+        },
+
+        getTasks(){
+            axios.post('https://upster.co.uk/tasks-manager/tasks',{token: localStorage.getItem('token'),date: this.filterBy.date}).then(result => {
              this.tasks=result.data
             })
         },
         logOut(){
             localStorage.clear();
             window.location.assign('index.html')
-        }
+        },
 
 
     },
     computed:{
-       
+
         danger(){
             return this.storeStatus == 'high'
         },
@@ -126,10 +136,10 @@ var app = new Vue({
         },
         success(){
             return this.storeStatus == 'low'
-        }
+        },
     },
     mounted(){
-        this.getTodayTasks()
+        this.getTasks()
     },
     created(){
         if(!localStorage.getItem('token')){

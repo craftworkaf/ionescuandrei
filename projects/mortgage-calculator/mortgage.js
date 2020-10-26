@@ -43,18 +43,15 @@ $('#submit').click(function calculator(){
 
 });
 
+/*
+ * When pressing the clear button, all input fields are cleared
+ */
+
 $('#clear').click(function(){
         $('input').val('');
         $('#h1').focus();
     }
 );
-
-
-
-
-
-
-
 
 
 
