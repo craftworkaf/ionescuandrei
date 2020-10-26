@@ -6,6 +6,7 @@ var app = new Vue({
         tasks: [],
         storeStatus:'',
         temptask : '',
+        temptasks:[],
         filterBy :{
             date:'',
             taskName:'',
@@ -117,17 +118,30 @@ var app = new Vue({
         getTasks(){
             axios.post('https://upster.co.uk/tasks-manager/tasks',{token: localStorage.getItem('token'),date: this.filterBy.date}).then(result => {
              this.tasks=result.data
+             this.temptasks=result.data
             })
         },
         logOut(){
             localStorage.clear();
             window.location.assign('index.html')
         },
+        getPriorityCount(level){
+            var filtered = this.tasks.filter((el)=>el.priority==level)
+            return filtered.length
+        },
+        filterByPriority(importance){
+            
+            return this.tasks = this.temptasks.filter(el=>el.priority==importance)
+        }
 
 
     },
     computed:{
-
+        unfinished(){
+            return this.tasks.filter((el)=>{
+                return el.completed==0
+            })
+        },        
         danger(){
             return this.storeStatus == 'high'
         },
