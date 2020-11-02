@@ -1,0 +1,187 @@
+body{
+    margin:0px;
+    padding:0px;
+    background-color:#49ab9c;
+}
+
+.container{
+    width:100vw;
+    height:100vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.main{
+display: flex;
+flex-direction: row;
+
+}
+
+
+
+
+/**** Action Bar *****/
+
+
+
+.actionBar{
+    height:300px;
+    width:80px;
+    background-color: white;
+    margin:1%;
+    border-radius: 5px;
+    
+}
+
+.actionbar button{
+   width:100%;
+   height:25%;
+   background-color:white;
+   border:none;
+   transition-duration: 0.5s;
+   border-radius: 3px;
+   border-bottom: 1px solid rgba(128, 128, 128, 0.123);
+
+}
+.actionbar button:hover{
+    background-color:silver;
+}
+
+
+
+
+
+/**** Article Body *****/
+
+
+
+.articleBody{
+    height:65vh;
+    width:25vw;
+    min-width: 350px;
+    background-color:white;
+    border-radius: 3px;
+    overflow: hidden;
+    
+}
+
+.articleBanner{
+    height:50%;
+    background-image: url("article-background.webp") ;
+    background-image:center;
+    clip-path: polygon(100% 0, 100% 90%, 50% 100%, 0 79%, 0 0);
+
+}
+
+
+/**** Article content *****/
+
+
+.article{
+    width:100%;
+    height:40%;
+    background-color:white;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    
+
+}
+
+.avatar{
+    width: 150px;
+    height: 150px;
+    border-radius: 50%;
+    position: absolute;
+    left:36%;
+    top:38%;
+    background-image: url('avatar.png');
+    background-size: cover;
+    box-shadow: -20px 10px 0px -5px rgba(103,184,123,0.39);
+}
+
+.articleTitle{
+    
+    align-items: center;
+    text-align: center;
+}
+
+.socialMedia{
+    width:100%;
+    height:25px;
+    text-align: center;
+}
+
+.socialMedia button{
+    width:25px;
+    height:25px;
+            
+}
+
+
+
+/******* Article buttons *****/
+
+
+.articleButtons{
+    width:100%;
+    height:10%;
+    display:flex;
+    flex-direction: row;
+ 
+}
+
+.articleButtons button{
+    width:50%;
+    height:100%;
+    background-color:white;
+    border:none;
+    transition-duration: 0.5s;
+    border-radius: 1px;
+    border-top: 1px solid rgba(128, 128, 128, 0.1);
+    border-right: 1px solid rgba(128, 128, 128, 0.1);
+    
+}
+.articleButtons button:hover{
+    background-color:silver;
+}
+
+
+
+
+
+/**** Aside body *****/
+
+
+.aside{
+    height:60vh;
+    width:25vw;
+    background-color:white;
+    margin-top: 2%;
+    border-radius: 3px;
+
+   
+}
+
+
+
+
+.shadow{
+    -webkit-box-shadow: 0px 0px 3px 0px rgba(0,0,0,0.75);
+    -moz-box-shadow: 0px 0px 3px 0px rgba(0,0,0,0.75);
+    box-shadow: 0px 0px 3px 0px rgba(0,0,0,0.75);
+}
+
+.shadowOutset{
+    -webkit-box-shadow: 5px 0px 4px 0px rgba(0,0,0,0.3);
+    -moz-box-shadow: 5px 0px 4px 0px rgba(0,0,0,0.3);
+    box-shadow: 5px 0px 4px 0px rgba(0,0,0,0.3);
+}
+
+.shadowInset{
+    -webkit-box-shadow: inset 5px 0px 4px 0px rgba(0,0,0,0.51);
+    -moz-box-shadow: inset 5px 0px 4px 0px rgba(0,0,0,0.51);
+    box-shadow: inset 5px 0px 4px 0px rgba(0,0,0,0.51);
+}
