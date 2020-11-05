@@ -18,11 +18,9 @@ $(document).ready(function(){
  * @param {*} obj 
  */
 function modalTemplate(obj){
-
-    var template = `<p class="product" data-item = "${obj.item}" data-price = ${obj.price} > Item: ${obj.item}, Description: ${obj.description}, Price: ${obj.price} </p>`
+    var template = `<p class="product" data-item = "${obj.item}" data-price = ${obj.price} > <br> ${obj.item}, <br>${obj.description}, <br>£ ${obj.price} </p>`
     return template;
 }
-
 //=============================================
 
 
@@ -49,7 +47,6 @@ $('.menuItem').click( function(){
     $('.overlay').show();
     
     menuItem = $(this).text().toLowerCase().trim();
-
     if(menuItem !='settings'){
 
        var category = stock[menuItem];
@@ -89,10 +86,9 @@ $('.modal').on('click','.product',function(){
     }
 
     $('.orderItems').html(insertOrderItems(orderList));
-    $('.total').html(calculateTotal(orderList));
+    $('.totalOutput').html( '£'+ calculateTotal(orderList));
     
 })
-
 //=====================================================
 
 
@@ -109,6 +105,15 @@ $(document).keyup(function(e){
         $('.overlay').hide();
     }
 })
+
+
+$('.closeModal').click(function(){
+
+    $('.overlay').hide()
+
+})
+
+
 
 
 //====================================================
@@ -134,7 +139,6 @@ function calculateTotal(param=[]){
     return total.toFixed(2);
 
 }
-
 //==============================
 
 
@@ -150,7 +154,7 @@ function insertOrderItems(orders = []){
 
     for (let index = 0; index < orders.length; index++) {
         const item = orders[index];
-        template+= `<p> ${item.item} | ${item.qty} | ${item.price} </p>`;
+        template+= `<div class="orderItem"><span class="mleft">${item.item}</span> <span>Qty: ${item.qty}</span> <span class="mright font20">£ ${item.price}</span> </div>`;
         
     }
 

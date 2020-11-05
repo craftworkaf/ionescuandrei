@@ -6,27 +6,45 @@
         <meta name="description" content="">
         <meta name="viewport" content="width=device-width, initial-scale=1">
         <link rel="stylesheet" href="./src/style.css">
-        
+        <link href="https://fonts.googleapis.com/css2?family=Raleway&family=Roboto&display=swap" rel="stylesheet">
     </head>
     <body>
         
- <!-- ======== Menu Container=================================== -->
+ <!-- ============ Menu Container=================================== -->
 
         <div class="container"> 
 
             <div class="items">
 
-                <div class="coffee menuItem">Coffee</div>
-                <div class="tea menuItem">Tea</div>
-                <div class="snacks menuItem">Snacks</div>
-                <div class="food menuItem">Food</div>
-                <div class="beverage menuItem">Bev</div>
-                <div class="settings menuItem">Settings</div>
+                <div class="coffee menuItem">
+                    <img src="./src/photos/coffee-cup.svg" >
+                    Coffee
+                </div>
+                <div class="tea menuItem">
+                    <img src="./src/photos/tea.svg" >
+                    Tea
+                    </div>
+                <div class="snacks menuItem">
+                    <img src="./src/photos/snacks.svg" >
+                    Snacks
+                    </div>
+                <div class="food menuItem">
+                    <img src="./src/photos/fork.svg" >
+                    Food
+                    </div>
+                <div class="beverage menuItem">
+                    <img src="./src/photos/beer.svg" >
+                    Bev
+                    </div>
+                <div class="settings menuItem">
+                    <img src="./src/photos/settings.svg" >
+                    Settings
+                    </div>
 
             </div>
 
 
-<!-- =========== Side Container=================================== -->
+<!-- ============ Side Container=================================== -->
 
             <div class="aside">
 
@@ -39,9 +57,11 @@
 
                 <div class="totalContainer">
 
-                    <h2>Total</h2>
-
-                    <div class="total">
+                    <div class="totalTitle">
+                        <h2>Total</h2>
+                    </div>
+                    
+                    <div class="totalOutput">
                     </div>
 
                     <div class="totalMenu">
@@ -59,11 +79,12 @@
 
         </div>
 
-<!-- ========= Menu items overlay =========================== -->
+<!-- ============ Menu items overlay =========================== -->
         <div class="overlay" hidden>
             <div class="modal">
-
+                
             </div>
+            <button class="closeModal">X</button>
         </div>
       
 
