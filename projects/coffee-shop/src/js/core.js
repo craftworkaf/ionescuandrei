@@ -24,6 +24,14 @@ function modalTemplate(obj){
 //=============================================
 
 
+function editOrderItem(obj){
+
+    
+
+}
+
+
+
 /**
  * Item template for the order list array
  * 
@@ -154,11 +162,22 @@ function insertOrderItems(orders = []){
 
     for (let index = 0; index < orders.length; index++) {
         const item = orders[index];
-        template+= `<div class="orderItem"><span class="mleft">${item.item}</span> <span>Qty: ${item.qty}</span> <span class="mright font20">£ ${item.price}</span> </div>`;
-        
+        template+= `<div class="orderItem" data-index=${index} ><span class="mleft">${item.item}</span> <span>Qty: ${item.qty}</span> <span class="mright font20">£ ${item.price}</span> </div>`;
     }
-
     return template
 }
 
 
+
+
+function orderItems(obj){
+    var template = ``
+    return template;
+}
+
+
+$('.aside').on('click','.orderItem',function(){
+
+    
+
+})
