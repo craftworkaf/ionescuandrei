@@ -24,10 +24,20 @@ function modalTemplate(obj){
 //=============================================
 
 
-function editOrderItem(obj){
+function editOrderItem(obj,index){
 
-    
+var template = `<div class="slidecontainer">
+    Quantity: <span id="qty">${obj.qty}</span>
+    <input type="range" onchange="showQuantity(this,${index})" min="1" max="10" value="${obj.qty}" class="slider" id="myRange">
+    </div>`
 
+return template  
+
+}
+
+function showQuantity(x,index){
+    $('#qty').text(x.value)
+    orderList[index].qty=x.value
 }
 
 
@@ -177,7 +187,11 @@ function orderItems(obj){
 
 
 $('.aside').on('click','.orderItem',function(){
+    var index = $(this).attr('data-index')
+    var obj = orderList[index]
 
-    
+        // console.log(obj)
+    $('.modal').html(editOrderItem(obj,index))
+    $('.overlay').show()
 
 })
