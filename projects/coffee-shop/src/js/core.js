@@ -18,7 +18,7 @@ $(document).ready(function(){
  * @param {*} obj 
  */
 function modalTemplate(obj){
-    var template = `<p class="product" data-item = "${obj.item}" data-price = ${obj.price} > <br> ${obj.item}, <br>${obj.description}, <br>£ ${obj.price} </p>`
+    var template = `<p class="product" data-item = "${obj.item}" data-price = ${obj.price} data-description = ${obj.description}> <br> ${obj.item}, <br>${obj.description}, <br>£ ${obj.price} </p>`
     return template;
 }
 //=============================================
@@ -26,9 +26,20 @@ function modalTemplate(obj){
 
 function editOrderItem(obj,index){
 
-var template = `<div class="slidecontainer">
-    Quantity: <span id="qty">${obj.qty}</span>
-    <input type="range" onchange="showQuantity(this,${index})" min="1" max="10" value="${obj.qty}" class="slider" id="myRange">
+var template = `
+    <div class="editOrderModal">
+                
+       <div class="editOrderTitle"> <h1>${obj.item}</h1><h1>£${obj.price}</h1></div>
+
+       <div class="editOrderDescription"><p>${obj.description}</p></div>
+
+    <div class="editOrderQty"><h3>Quantity</h3> <h3 id="qty">${Number(obj.qty)}  </h3></div>
+          
+    <input type="range" onchange="showQuantity(this,${index})" min="1" max="10" value="${Number(obj.qty)}" class="slider" id="myRange">
+    <br>
+    <div class="editOrderComment"> <h4>Comments</h4> <textarea rows=3 ></textarea> </div>
+    <br>
+    <div class="editOrderButtons"> <button>Save</button><button>Close</button></div>
     </div>`
 
 return template  
@@ -50,9 +61,9 @@ function showQuantity(order,index){
  * @param {*} item 
  * @param {*} price 
  */
-function createOrderItem(item,price){
+function createOrderItem(item,description,price){
 
-    return { item:item, price:price, qty:1 }
+    return { item:item,description:description ,price:price, qty:1 }
 }
 //================================================
 
@@ -91,6 +102,7 @@ $('.modal').on('click','.product',function(){
 
     var item = $(this).attr('data-item');
     var price = $(this).attr('data-price');
+    var description = $(this).attr('data-description')
     var compare = orderList.filter((el)=>el.item==item);
     var index = -1;
 
@@ -99,9 +111,9 @@ $('.modal').on('click','.product',function(){
     }
 
     if(index != -1){
-        orderList[index]['qty']+=1;       
+        orderList[index]['qty']++;       
     }else{
-        let objectItem = createOrderItem(item,price);
+        let objectItem = createOrderItem(item,description,price);
         orderList.push(objectItem);
     }
 
@@ -174,7 +186,8 @@ function insertOrderItems(orders = []){
 
     for (let index = 0; index < orders.length; index++) {
         const item = orders[index];
-        template+= `<div class="orderItem" data-index=${index} ><span class="mleft">${item.item}</span> <span>Qty: ${item.qty}</span> <span class="mright font20">£ ${item.price}</span> </div>`;
+
+        template+= `<div class="orderItem" data-index=${index} ><span class="mleft">${item.item}</span> <span>Qty: ${Number(item.qty)}</span> <span class="mright font20">£ ${item.price}</span> </div>`;
     }
     return template
 }

@@ -2,27 +2,27 @@ var stock = {
     "coffee": [
         {
             "item": "MilkCoffee",
-            "description":"N/A",
+            "description":"Description",
             "price": 2.40
         },
         {
             "item":"Capuchino",
-            "description":"N/A",
+            "description":"Description",
             "price":2.45
         },
         {
             "item":"Decaf",
-            "description":"N/A",
+            "description":"Description",
             "price":2.55
         },
         {
             "item":"Espresso",
-            "description":"N/A",
+            "description":"Description",
             "price" : 2.55
         },
         {
             "item":"Americano",
-            "description":"N/A",
+            "description":"Description",
             "price":2.45
         }
     ],
@@ -61,22 +61,22 @@ var stock = {
     "bev":[
         {
             "item" : "CocaCola",
-            "description" : "N/A",
+            "description" : "Description",
             "price":1.10
         },
         {
             "item" : "Still Water",
-            "description" : "N/A",
+            "description" : "Description",
             "price":1.10
         },
         {
             "item" : "Pepsi",
-            "description" : "N/A",
+            "description" : "Description",
             "price":1.10
         },
         {
             "item" : "Fresh Juice",
-            "description" : "N/A",
+            "description" : "Description",
             "price":1.10
         }
         
@@ -85,22 +85,22 @@ var stock = {
     "snacks":[
         {
             "item" : "Cake1",
-            "description" : "N/A",
+            "description" : "Description",
             "price":2.19
         },
         {
             "item" : "Cake2",
-            "description" : "N/A",
+            "description" : "Description",
             "price":2.75
         },
         {
             "item" : "Cake3",
-            "description" : "N/A",
+            "description" : "Description",
             "price":2.73
         },
         {
             "item" : "Cake4",
-            "description" : "N/A",
+            "description" : "Description",
             "price":2.10
         }
         
@@ -109,22 +109,22 @@ var stock = {
     "tea":[
         {
             "item" : "Asian Tea",
-            "description" : "N/A",
+            "description" : "Description",
             "price":1.90
         },
         {
             "item" : "European Tea",
-            "description" : "N/A",
+            "description" : "Description",
             "price":2.75
         },
         {
             "item" : "Green Tea",
-            "description" : "N/A",
+            "description" : "Description",
             "price":2.73
         },
         {
             "item" : "Normal Tea",
-            "description" : "N/A",
+            "description" : "Description",
             "price":2.10
         }
         

@@ -197,6 +197,81 @@ h2{
 
 
 
+/* ============ Edit Order Modal ===========================  */
+
+.editOrderModal{
+    width:800px;
+    height:500px;
+    
+    color:white;
+   
+    padding: 10px;
+  }
+  
+  .editOrderModal textarea{
+    width:90%;
+    margin:auto;
+  }
+  
+  .editOrderTitle{
+    display:flex;
+    flex-direction:row;
+    justify-content:space-between;
+    height:20%;
+  }
+  .editOrderDescription{
+    height:10%;
+       
+  }
+  .editOrderDescription p{
+    border-bottom: 3px solid white;
+  }
+  .editOrderQty{
+    height:10%;
+    display:flex;
+    justify-content:space-between;
+  }
+  .editOrderQty h3{
+    width:10%;
+    text-align: center;
+  }
+  .editOrderComment{
+    height:20%;
+    width:100%;
+    text-align: center;
+  }
+  .editOrderComment textarea{
+      width:100%;
+      font-size: 18px;
+  }
+  .editOrderComment h4{
+    text-align: left;
+    padding-bottom: 0;
+    margin-bottom: 0%;
+    
+}
+
+  .editOrderButtons{
+    display:flex;
+    justify-content:space-around;
+  }
+
+  .editOrderButtons button{
+      background: #00c4a7;
+      -webkit-transition: .2s;
+      border:none;
+      width:200px;
+      height:80px;
+      font-size:20px;
+      font-weight: bolder;
+      color: rgb(19, 18, 18);
+
+  }
+  
+
+/* =========================================== */
+
+
 
 
 
@@ -206,29 +281,24 @@ h2{
     -webkit-appearance: none;
     width: 100%;
     height: 25px;
-    background: #d3d3d3;
+    background: #ffffff;
     outline: none;
-    opacity: 0.7;
-    -webkit-transition: .2s;
-    transition: opacity .2s;
-  }
-  
-  .slider:hover {
-    opacity: 1;
-  }
-  
-  .slider::-webkit-slider-thumb {
+    
+}
+
+
+.slider::-webkit-slider-thumb {
     -webkit-appearance: none;
     appearance: none;
     width: 25px;
-    height: 25px;
-    background: #4CAF50;
+    height: 45px;
+    background: #00c4a7;
     cursor: pointer;
-  }
-  
-  .slider::-moz-range-thumb {
+}
+
+.slider::-moz-range-thumb {
     width: 25px;
     height: 25px;
-    background: #4CAF50;
+    background: #00c4a7;
     cursor: pointer;
-  }
+}
