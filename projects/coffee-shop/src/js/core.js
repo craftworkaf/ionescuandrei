@@ -35,9 +35,11 @@ return template
 
 }
 
-function showQuantity(x,index){
-    $('#qty').text(x.value)
-    orderList[index].qty=x.value
+function showQuantity(order,index){
+    $('#qty').text(order.value);
+    orderList[index].qty=order.value;
+    $('.orderItems').html(insertOrderItems(orderList));
+    $('.totalOutput').html( '£'+ calculateTotal(orderList));
 }
 
 
