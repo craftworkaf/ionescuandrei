@@ -58,7 +58,7 @@ function editOrderItem(obj,index){
                 
             <div class="editOrderButtons"> 
                 <button onclick="saveItem(${index})" class="orderSaveBtn">Save</button> 
-                <button class="orderDeleteBtn">Delete</button> 
+                <button onclick="deleteItem(${index})" class="orderDeleteBtn">Delete</button> 
             </div>
 
         </div>`
@@ -242,4 +242,21 @@ function saveItem(index){
 
 }
 
+
+
+
+
+
+
+function deleteItem(index){
+    console.log(orderList[index]);
+
+    orderList = orderList.filter(!=orderList[index])
+    
+
+    $('.overlay').hide();
+    $('.orderItems').html(insertOrderItems(orderList));
+    $('.totalOutput').html( '£'+ calculateTotal(orderList));
+
+}
 
