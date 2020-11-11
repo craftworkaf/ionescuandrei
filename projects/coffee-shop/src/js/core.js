@@ -13,7 +13,7 @@ $(document).ready(function(){
 
 
 /**
- * Generates a order item template
+ * Template for generating an order item 
  * 
  * @param {*} obj 
  */
@@ -23,32 +23,55 @@ function modalTemplate(obj){
 }
 //=============================================
 
-
+/**
+ * ========Generates the Edit order modal =================
+ * @param {*} obj 
+ * @param {*} index 
+ */
 function editOrderItem(obj,index){
 
-var template = `
-    <div class="editOrderModal">
+    var template = 
+        `<div class="editOrderModal">
+                    
+            <div class="editOrderTitle"> 
+                <h1>${obj.item}</h1>
+                <h1>£${obj.price}</h1>
+            </div>
+
+            <div class="editOrderDescription">
+                <p>${obj.description}</p>
+            </div>
+
+            <div class="editOrderQty">
+                <h3>Quantity</h3> 
+                <h3 id="qty">${Number(obj.qty)}</h3>
+            </div>
+            
+            <input type="range" id="quantity" onchange="showQuantity(this,${index})" min="1" max="10" value="${Number(obj.qty)}" class="slider" id="myRange">
+                <br>
+            
+            <div class="editOrderComment "> 
+                <h4>Comments</h4> 
+                <textarea rows=3 id="comment">${obj.comment}</textarea> 
+            </div>
+                <br>
                 
-       <div class="editOrderTitle"> <h1>${obj.item}</h1><h1>£${obj.price}</h1></div>
+            <div class="editOrderButtons"> 
+                <button onclick="saveItem(${index})" class="orderSaveBtn">Save</button> 
+                <button class="orderDeleteBtn">Delete</button> 
+            </div>
 
-       <div class="editOrderDescription"><p>${obj.description}</p></div>
+        </div>`
 
-    <div class="editOrderQty"><h3>Quantity</h3> <h3 id="qty">${Number(obj.qty)}  </h3></div>
-          
-    <input type="range" onchange="showQuantity(this,${index})" min="1" max="10" value="${Number(obj.qty)}" class="slider" id="myRange">
-    <br>
-    <div class="editOrderComment"> <h4>Comments</h4> <textarea rows=3 ></textarea> </div>
-    <br>
-    <div class="editOrderButtons"> <button>Save</button><button>Close</button></div>
-    </div>`
-
-return template  
-
+    return template  
 }
+
+/**===============End of Edit Order Modal================================= */
+
 
 function showQuantity(order,index){
     $('#qty').text(order.value);
-    orderList[index].qty=order.value;
+    // orderList[index].qty=order.value;
     $('.orderItems').html(insertOrderItems(orderList));
     $('.totalOutput').html( '£'+ calculateTotal(orderList));
 }
@@ -63,7 +86,7 @@ function showQuantity(order,index){
  */
 function createOrderItem(item,description,price){
 
-    return { item:item,description:description ,price:price, qty:1 }
+    return { item:item,description:description,comment:"",price:price, qty:1 }
 }
 //================================================
 
@@ -102,7 +125,7 @@ $('.modal').on('click','.product',function(){
 
     var item = $(this).attr('data-item');
     var price = $(this).attr('data-price');
-    var description = $(this).attr('data-description')
+    var description = $(this).attr('data-description');
     var compare = orderList.filter((el)=>el.item==item);
     var index = -1;
 
@@ -120,7 +143,7 @@ $('.modal').on('click','.product',function(){
     $('.orderItems').html(insertOrderItems(orderList));
     $('.totalOutput').html( '£'+ calculateTotal(orderList));
     
-})
+});
 //=====================================================
 
 
@@ -128,7 +151,7 @@ $('.modal').on('click','.product',function(){
 
 
 /**
- * Closes the item menu modal
+ * ========= Hides the item menu modal when pressing Esc ================
  * 
  */
 
@@ -141,10 +164,9 @@ $(document).keyup(function(e){
 
 $('.closeModal').click(function(){
 
-    $('.overlay').hide()
+    $('.overlay').hide();
 
 })
-
 
 
 
@@ -169,7 +191,6 @@ function calculateTotal(param=[]){
     }
 
     return total.toFixed(2);
-
 }
 //==============================
 
@@ -186,27 +207,39 @@ function insertOrderItems(orders = []){
 
     for (let index = 0; index < orders.length; index++) {
         const item = orders[index];
+        template+= `<div class="orderItem ${item.comment?'commented':''}"  data-index=${index} ><span class="mleft">${item.item}</span> <span>Qty: ${Number(item.qty)}</span> <span class="mright font20">£ ${item.price}</span> </div>`;
 
-        template+= `<div class="orderItem" data-index=${index} ><span class="mleft">${item.item}</span> <span>Qty: ${Number(item.qty)}</span> <span class="mright font20">£ ${item.price}</span> </div>`;
     }
-    return template
+    return template;
 }
 
 
 
 
 function orderItems(obj){
-    var template = ``
+    var template = ``;
     return template;
 }
 
 
 $('.aside').on('click','.orderItem',function(){
-    var index = $(this).attr('data-index')
-    var obj = orderList[index]
+    var index = $(this).attr('data-index');
+    var obj = orderList[index];
 
-        // console.log(obj)
-    $('.modal').html(editOrderItem(obj,index))
-    $('.overlay').show()
+    $('.modal').html(editOrderItem(obj,index));
+    $('.overlay').show();
 
 })
+
+function saveItem(index){
+    
+    let comment = $('#comment').val();
+    orderList[index].comment = comment;
+    orderList[index].qty = $('#quantity').val();
+    $('.overlay').hide();
+    $('.orderItems').html(insertOrderItems(orderList));
+    $('.totalOutput').html( '£'+ calculateTotal(orderList));
+
+}
+
+

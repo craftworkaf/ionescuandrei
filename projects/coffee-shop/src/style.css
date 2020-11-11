@@ -114,8 +114,8 @@ h2{
     margin-right:3px;
     background: none;
     color: white;
-    border:2px solid white;
-    border-radius: 5px;
+    border:1px solid white;
+    border-radius: 2px;
     margin-bottom: 5px;
 }
 .totalOutput{
@@ -149,6 +149,7 @@ h2{
     align-items: center;
     justify-content: center;
     max-width: 80%;
+    border-radius: 3px;
 }
 
 .product{
@@ -195,6 +196,9 @@ h2{
     font-size: 20px;
 }
 
+.commented{
+    color:orange;
+}
 
 
 /* ============ Edit Order Modal ===========================  */
@@ -202,11 +206,10 @@ h2{
 .editOrderModal{
     width:800px;
     height:500px;
-    
     color:white;
-   
     padding: 10px;
-  }
+    border-radius: 3px;
+ }
   
   .editOrderModal textarea{
     width:90%;
@@ -221,7 +224,6 @@ h2{
   }
   .editOrderDescription{
     height:10%;
-       
   }
   .editOrderDescription p{
     border-bottom: 3px solid white;
@@ -254,20 +256,31 @@ h2{
   .editOrderButtons{
     display:flex;
     justify-content:space-around;
+    
   }
 
-  .editOrderButtons button{
-      background: #00c4a7;
-      -webkit-transition: .2s;
-      border:none;
-      width:200px;
-      height:80px;
-      font-size:20px;
-      font-weight: bolder;
-      color: rgb(19, 18, 18);
-
-  }
+  .orderSaveBtn{
+    background:  #00c4a7;
+    -webkit-transition: 0.2s;
+    border:none;
+    width:200px;
+    height:80px;
+    font-size:20px;
+    font-weight: bolder;
+    color: rgb(19, 18, 18);
+    border-radius: 3px;
+}
   
+.orderDeleteBtn{
+    background:  rgba(0, 0, 0, 0.137);
+    border:1px solid rgb(161, 26, 26);
+    width:200px;
+    height:80px;
+    font-size:20px;
+    font-weight: bolder;
+    color: rgb(255, 255, 255);
+    border-radius: 3px;
+}
 
 /* =========================================== */
 
@@ -283,7 +296,7 @@ h2{
     height: 25px;
     background: #ffffff;
     outline: none;
-    
+    border-radius: 2px;
 }
 
 
@@ -294,6 +307,7 @@ h2{
     height: 45px;
     background: #00c4a7;
     cursor: pointer;
+    border-radius: 2px;
 }
 
 .slider::-moz-range-thumb {
