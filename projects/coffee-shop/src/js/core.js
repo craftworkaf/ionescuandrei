@@ -245,18 +245,93 @@ function saveItem(index){
 
 
 
+function deleteItem(i){
+    console.log(i);
 
+    // orderList = orderList.filter(function(el, index ) {
+    //     return index !=i;
+    // });
 
+    let newOrderList = [];
+    if(window.confirm("Are you sure ?")){
+    for(let index = 0; index < orderList.length; index++){
+            if(index != i){
+                newOrderList.push(orderList[index])
+            }
+    }
+    orderList = newOrderList;
 
-function deleteItem(index){
-    console.log(orderList[index]);
-
-    orderList = orderList.filter(!=orderList[index])
-    
+    // orderlist=orderList.splice(index,1);
 
     $('.overlay').hide();
     $('.orderItems').html(insertOrderItems(orderList));
     $('.totalOutput').html( '£'+ calculateTotal(orderList));
-
+    }
 }
 
+$('.aside').on('click','.cancelOrder',function(){
+
+    if(window.confirm("Are you sure ?")){
+        orderList = [];
+        $('.orderItems').html(insertOrderItems(orderList));
+        $('.totalOutput').html( '£'+ calculateTotal(orderList));
+    }
+});
+
+
+
+function modal_Container(){
+
+    var template = 
+        `<div class="modal_Container">
+    
+                <div class="top">
+                    <div class="left">
+                        <div class="l1">
+                            <button id="orderType">In</button>
+                            <button id="orderType">Out</button>
+                            <button id="orderType">Delivery</button>
+                        </div>
+                        <div class="l2">
+                        <h4>Payment Type</h4>
+                        <button>Cash</button>
+                        </div>
+                    <div class="l3">
+                        <h4>Ammount</h4>
+                        <input type="text">
+                    </div>
+                    </div>
+                
+                    <div class="right">
+                        <div class="r1">
+                        <h3>Total</h3>
+                        </div>
+                        <div class="r2">
+                        <button>Card</button>
+                        </div>
+                    <div class="r3">
+                        <h4>Change</h4>
+                        <h3>Ammount</h3>
+                    </div>
+                    </div>
+                
+                </div>
+                
+                <div class="bottom">
+                
+                </div>
+            
+</div> `
+
+    return template  
+}
+
+
+$('.aside').on('click','.completeOrder',function(){
+
+    $('.modal').html(modal_Container());
+    $('.overlay').show();
+    
+
+
+});
