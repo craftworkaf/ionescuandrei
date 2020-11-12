@@ -1,6 +1,7 @@
 let menuItem = ''
 let orderList = []
-let orderType = 'delivery'
+let orderType = 'in'
+let paymentType = 'card'
 
 /**
  * Defauly hidden for the overlay.
@@ -288,18 +289,16 @@ function modal_Container(){
             <div class="top">
                 <div class="left">
                     <div class="l1">
-                    ${checkOrderType(orderType)}
-                   
-
+                        ${checkOrderType(orderType)}
                     </div>
                     <div class="l2">
-                    <h4>Payment Type</h4>
-                    <button>Cash</button>
+                        <h4>Payment Type</h4>
+                        <button id="cash" data-value'cash'>Cash</button>
                     </div>
-                <div class="l3">
-                    <h4>Ammount</h4>
-                    <input type="text">
-                </div>
+                    <div class="l3">
+                        <h4>Ammount</h4>
+                        <input type="text">
+                    </div>
                 </div>
             
                 <div class="right">
@@ -308,21 +307,21 @@ function modal_Container(){
                     </div>
                     <div class="r2">
                     
-                    <button>Card</button>
+                    <button id="card" data-value='card'>Card</button>
                     </div>
-                <div class="r3">
-                    <h4>Change</h4>
-                    <h3>Ammount</h3>
-                </div>
+                    <div class="r3">
+                        <h4>Change</h4>
+                        <h3>Ammount</h3>
+                    </div>
                 </div>
                 
             </div>
             
             <div class="bottom">
-            <button>Pay</button>
+                <button>Pay</button>
             </div>
     
-</div> `
+        </div> `
 
     return template  
 }
@@ -333,8 +332,6 @@ $('.aside').on('click','.completeOrder',function(){
     $('.modal').html(modal_Container());
     $('.overlay').show();
     
-
-
 });
 
 // $('.modal').on('click',"button",function(){
@@ -343,26 +340,47 @@ $('.aside').on('click','.completeOrder',function(){
 
 function checkOrderType(data){
     
-    // if(data == 'in') {
-    //     return `<button id="orderType" data-orderType="in" style="background-color:white; color:black">In</button>`
-    // }else if(data == 'out'){
-    //     return `<button id="orderType" data-orderType="out" style="background-color:white; color:black">Out</button>`
-    // }else if(data=='delivery') {
-    //     return `<button id="orderType" data-orderType="delivery" style="background-color:white; color:black">Delivery</button>`
-    // }
+    
+
     if(data == 'in') {
-        return `<button id="orderType" data-orderType="in" style="background-color:white; color:black">In</button>
-                <button id="orderType" data-orderType="out" style="background-color:none; color:white">Out</button>
-                <button id="orderType" data-orderType="delivery" style="background-color:none; color:white">Delivery</button>`
+        return `<button id="orderType" data-value="in" style="background-color:white; color:black">In</button>
+                <button id="orderType" data-value="out" style="background-color:none; color:white">Out</button>
+                <button id="orderType" data-value="delivery" style="background-color:none; color:white">Delivery</button>`
     }else if(data == 'out'){
-        return  `<button id="orderType" data-orderType="in" style="background-color:none; color:white">In</button>
-                <button id="orderType" data-orderType="out" style="background-color:white; color:black">Out</button>
-                <button id="orderType" data-orderType="delivery" style="background-color:none; color:white">Delivery</button>`
+        return `<button id="orderType" data-value="in" style="background-color:none; color:white">In</button>
+                <button id="orderType" data-value="out" style="background-color:white; color:black">Out</button>
+                <button id="orderType" data-value="delivery" style="background-color:none; color:white">Delivery</button>`
     }else if(data=='delivery') {
-       return  `<button id="orderType" data-orderType="in" style="background-color:none; color:white">In</button>
-                <button id="orderType" data-orderType="out" style="background-color:none; color:white">Out</button>
-                <button id="orderType" data-orderType="delivery" style="background-color:white; color:black">Delivery</button>`
+       return  `<button id="orderType" data-value="in" style="background-color:none; color:white">In</button>
+                <button id="orderType" data-value="out" style="background-color:none; color:white">Out</button>
+                <button id="orderType" data-value="delivery" style="background-color:white; color:black">Delivery</button>`
+    }
+}
+
+$('.modal').on('click','#orderType',function(){
+    orderType=$(this).data('value');
+    $(".l1").html( checkOrderType(orderType));
+})
+
+
+function checkPaymentType(paymentType){
+    console.log(paymentType)
+    if(paymentType = 'card'){
+        $('#cash').css({"background":"none","color":"white"})
+        $('#card').css({"background":"white","color":"black"})
+    }else{
+        $('#cash').css({"background":"white","color":"black"})
+        $('#card').css({"background":"black","color":"white"})
     }
 
-    
 }
+
+$('.modal').on('click','#card',function(){
+    orderType=$(this).data('value');
+    checkPaymentType(paymentType);
+})
+
+$('.modal').on('click','#cash',function(){
+    orderType=$(this).data('value');
+    checkPaymentType(paymentType);
+})
