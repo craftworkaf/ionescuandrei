@@ -1,6 +1,6 @@
 let menuItem = ''
 let orderList = []
-
+let orderType = 'delivery'
 
 /**
  * Defauly hidden for the overlay.
@@ -288,9 +288,9 @@ function modal_Container(){
             <div class="top">
                 <div class="left">
                     <div class="l1">
-                        <button id="orderType">In</button>
-                        <button id="orderType">Out</button>
-                        <button id="orderType">Delivery</button>
+                    ${checkOrderType(orderType)}
+                   
+
                     </div>
                     <div class="l2">
                     <h4>Payment Type</h4>
@@ -336,3 +336,33 @@ $('.aside').on('click','.completeOrder',function(){
 
 
 });
+
+// $('.modal').on('click',"button",function(){
+//     $(this).css({"background":"white","color":"black" })
+// });
+
+function checkOrderType(data){
+    
+    // if(data == 'in') {
+    //     return `<button id="orderType" data-orderType="in" style="background-color:white; color:black">In</button>`
+    // }else if(data == 'out'){
+    //     return `<button id="orderType" data-orderType="out" style="background-color:white; color:black">Out</button>`
+    // }else if(data=='delivery') {
+    //     return `<button id="orderType" data-orderType="delivery" style="background-color:white; color:black">Delivery</button>`
+    // }
+    if(data == 'in') {
+        return `<button id="orderType" data-orderType="in" style="background-color:white; color:black">In</button>
+                <button id="orderType" data-orderType="out" style="background-color:none; color:white">Out</button>
+                <button id="orderType" data-orderType="delivery" style="background-color:none; color:white">Delivery</button>`
+    }else if(data == 'out'){
+        return  `<button id="orderType" data-orderType="in" style="background-color:none; color:white">In</button>
+                <button id="orderType" data-orderType="out" style="background-color:white; color:black">Out</button>
+                <button id="orderType" data-orderType="delivery" style="background-color:none; color:white">Delivery</button>`
+    }else if(data=='delivery') {
+       return  `<button id="orderType" data-orderType="in" style="background-color:none; color:white">In</button>
+                <button id="orderType" data-orderType="out" style="background-color:none; color:white">Out</button>
+                <button id="orderType" data-orderType="delivery" style="background-color:white; color:black">Delivery</button>`
+    }
+
+    
+}
