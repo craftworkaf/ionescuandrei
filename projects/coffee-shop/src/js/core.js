@@ -283,44 +283,45 @@ $('.aside').on('click','.cancelOrder',function(){
 function modal_Container(){
 
     var template = 
-        `<div class="modal_Container">
+        `<div class="modal_container">
     
-                <div class="top">
-                    <div class="left">
-                        <div class="l1">
-                            <button id="orderType">In</button>
-                            <button id="orderType">Out</button>
-                            <button id="orderType">Delivery</button>
-                        </div>
-                        <div class="l2">
-                        <h4>Payment Type</h4>
-                        <button>Cash</button>
-                        </div>
-                    <div class="l3">
-                        <h4>Ammount</h4>
-                        <input type="text">
+            <div class="top">
+                <div class="left">
+                    <div class="l1">
+                        <button id="orderType">In</button>
+                        <button id="orderType">Out</button>
+                        <button id="orderType">Delivery</button>
                     </div>
+                    <div class="l2">
+                    <h4>Payment Type</h4>
+                    <button>Cash</button>
                     </div>
-                
-                    <div class="right">
-                        <div class="r1">
-                        <h3>Total</h3>
-                        </div>
-                        <div class="r2">
-                        <button>Card</button>
-                        </div>
-                    <div class="r3">
-                        <h4>Change</h4>
-                        <h3>Ammount</h3>
-                    </div>
-                    </div>
-                
+                <div class="l3">
+                    <h4>Ammount</h4>
+                    <input type="text">
                 </div>
-                
-                <div class="bottom">
-                
                 </div>
             
+                <div class="right">
+                    <div class="r1">
+                    <h3>Total</h3>
+                    </div>
+                    <div class="r2">
+                    
+                    <button>Card</button>
+                    </div>
+                <div class="r3">
+                    <h4>Change</h4>
+                    <h3>Ammount</h3>
+                </div>
+                </div>
+                
+            </div>
+            
+            <div class="bottom">
+            <button>Pay</button>
+            </div>
+    
 </div> `
 
     return template  
