@@ -2,7 +2,8 @@ body, html{
     margin:0!important;
     padding:0!important;
     background-color:rgb(0, 0, 0);
-    font-family: 'Raleway', sans-serif;
+    font-family: 'roboto', sans-serif;
+    letter-spacing: 1.3px;
 
 }
 h2{

@@ -1,8 +1,9 @@
 let menuItem = ''
 let orderList = []
 let orderType = 'in'
-let paymentType = 'card'
+let paymentType = ''
 
+let orderChange = 0;
 /**
  * Defauly hidden for the overlay.
  */
@@ -184,7 +185,7 @@ $('.closeModal').click(function(){
  */
 function calculateTotal(param=[]){
 
-    var total = 0;
+    let total = 0;
 
     for (let index = 0; index < param.length; index++) {
         const element = param[index];
@@ -293,25 +294,25 @@ function modal_Container(){
                     </div>
                     <div class="l2">
                         <h4>Payment Type</h4>
-                        <button id="cash" data-value'cash'>Cash</button>
+                        <button id="cash" data-value="cash" >Cash</button>
                     </div>
                     <div class="l3">
                         <h4>Ammount</h4>
-                        <input type="text">
+                        <input type="number" step=".01" oninput="calculateChange($(this))">
                     </div>
                 </div>
             
                 <div class="right">
                     <div class="r1">
-                    <h3>Total</h3>
+                    <h2 id="totalCost">Total</h2>
                     </div>
                     <div class="r2">
                     
-                    <button id="card" data-value='card'>Card</button>
+                    <button id="card" data-value="card" >Card</button>
                     </div>
                     <div class="r3">
-                        <h4>Change</h4>
-                        <h3>Ammount</h3>
+                        <h3>Change</h3>
+                        <h2 id="changeLeft">Ammount</h2>
                     </div>
                 </div>
                 
@@ -331,12 +332,10 @@ $('.aside').on('click','.completeOrder',function(){
 
     $('.modal').html(modal_Container());
     $('.overlay').show();
-    
+    $('#totalCost').html('Total'+ ' ' + '£' + calculateTotal(orderList));
 });
 
-// $('.modal').on('click',"button",function(){
-//     $(this).css({"background":"white","color":"black" })
-// });
+
 
 function checkOrderType(data){
     
@@ -363,24 +362,51 @@ $('.modal').on('click','#orderType',function(){
 })
 
 
+
+
+
 function checkPaymentType(paymentType){
-    console.log(paymentType)
-    if(paymentType = 'card'){
+    
+    if( paymentType == 'cash' ) {
+
+        $('#cash').css({"background":"white","color":"black"})
+        $('#card').css({"background":"none","color":"white"})
+        
+    }else if( paymentType == 'card' ){
+
         $('#cash').css({"background":"none","color":"white"})
         $('#card').css({"background":"white","color":"black"})
-    }else{
-        $('#cash').css({"background":"white","color":"black"})
-        $('#card').css({"background":"black","color":"white"})
+
     }
+
 
 }
 
+
+
 $('.modal').on('click','#card',function(){
-    orderType=$(this).data('value');
+     
+    paymentType = $('#card').data('value');
     checkPaymentType(paymentType);
-})
+  
+});
 
 $('.modal').on('click','#cash',function(){
-    orderType=$(this).data('value');
+        
+    paymentType = $('#cash').data('value');
     checkPaymentType(paymentType);
-})
+  
+});
+
+
+
+
+function calculateChange(input){
+    let total = calculateTotal(orderList);
+    if(paymentType == 'cash'){
+        let cash = input.val();
+        let changeLeft = '£' + parseFloat(cash - total).toFixed(2);
+        console.log(changeLeft)
+        $("#changeLeft").html(changeLeft)
+    }
+}
