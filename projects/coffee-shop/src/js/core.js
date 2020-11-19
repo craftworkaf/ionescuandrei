@@ -159,7 +159,7 @@ $('.modal').on('click','.product',function(){
 
     $('.orderItems').html(insertOrderItems(orderList));
     $('.totalOutput').html( '£'+ calculateTotal(orderList));
-    
+    calcOrderListHeight()
 });
 
 //=====================================================
@@ -272,6 +272,7 @@ function deleteItem(i){
     $('.overlay').hide();
     $('.orderItems').html(insertOrderItems(orderList));
     $('.totalOutput').html( '£'+ calculateTotal(orderList));
+    
     }
 }
 
@@ -470,23 +471,41 @@ function calculateChange(input){
 };
 //============================================================================
 
+
+/**
+ * Sets to orderType global variable to the desired value and sets the css for the buttons acordingly
+ */
 $('.orderType button').click(function(){
 
     
     orderType = $(this).data('value');
-
     $('.orderType button').removeClass('orderTypeSelected').addClass('orderTypeUnselected');
-
     $(this).removeClass('orderTypeUnselected');
     $(this).addClass('orderTypeSelected');
 
 })
 
+
+/**
+ * Sets the global  orderType variable to the default value(in) and resets the css for the buttons
+ */
 function resetOrderType(){
 
     orderType='in'
-    
     $('.orderType button').removeClass('orderTypeSelected').addClass('orderTypeUnselected')
     $('.orderType button[data-value="in"').removeClass('orderTypeUnselected').addClass('orderTypeSelected')
 
 }
+
+
+function calcOrderListHeight(){
+    height = $('.orderItems').height();
+    orderHeight = orderList.length * 50;
+    
+    if(height <= orderHeight){
+        $('.orderItems').addClass('orderItemsScrollable')
+    }else{
+        $('.orderItems').removeClass('orderItemsScrollable')
+    }
+}
+
