@@ -77,11 +77,17 @@ h2{
     width:30%;
     height:50px;
     margin-right:3px;
-    background: none;
-    color: white;
     border:1px solid white;
     border-radius: 2px;
     margin-bottom: 5px;
+}
+.orderTypeSelected{
+  background-color:white;
+  color:black;
+}
+.orderTypeUnselected{
+  background:none;
+  color:white;
 }
 
 .orderItems{
@@ -131,6 +137,7 @@ h2{
     border-radius: 2px;
     margin-bottom: 5px;
 }
+
 .totalOutput{
     font-size: 30px;
 }

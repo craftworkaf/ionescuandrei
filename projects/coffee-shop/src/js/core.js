@@ -9,6 +9,7 @@ let orderChange = 0;
  */
 $(document).ready(function(){
     $('.overlay').hide();
+    resetOrderType();
 })
 
 //=========================================
@@ -71,6 +72,20 @@ function editOrderItem(obj,index){
 /**===============End of Edit Order Modal================================= */
 
 
+/**Displays the edit order item Modal */
+
+$('.aside').on('click','.orderItem',function(){
+    var index = $(this).attr('data-index');
+    var obj = orderList[index];
+
+    $('.modal').html(editOrderItem(obj,index));
+    $('.overlay').show();
+
+});
+
+
+/** Display the edited item qty in the edit order modal */
+
 function showQuantity(order,index){
     $('#qty').text(order.value);
     // orderList[index].qty=order.value;
@@ -112,7 +127,7 @@ $('.menuItem').click( function(){
             var item = modalTemplate(category[index]);
 
             $('.modal').append(item);
-        }   
+        }
     }
 })
 //===================================================
@@ -146,6 +161,7 @@ $('.modal').on('click','.product',function(){
     $('.totalOutput').html( '£'+ calculateTotal(orderList));
     
 });
+
 //=====================================================
 
 
@@ -216,22 +232,13 @@ function insertOrderItems(orders = []){
 }
 
 
+//======================================================
 
 
-function orderItems(obj){
-    var template = ``;
-    return template;
-}
 
 
-$('.aside').on('click','.orderItem',function(){
-    var index = $(this).attr('data-index');
-    var obj = orderList[index];
-
-    $('.modal').html(editOrderItem(obj,index));
-    $('.overlay').show();
-
-})
+/**When in the order edit modal, this function allows you to save 
+ * the new quantity and comment for the item selected */
 
 function saveItem(index){
     
@@ -241,29 +248,26 @@ function saveItem(index){
     $('.overlay').hide();
     $('.orderItems').html(insertOrderItems(orderList));
     $('.totalOutput').html( '£'+ calculateTotal(orderList));
-
 }
+//=================================================================
 
-
-
+/**When clicking on the delete button, a new order list is generated 
+ * with all order items apart from the one selected.
+ * This new list is then atributed to the global orderList variable.
+ * After this, the order list html file is updated along with the new total.
+ */
 
 function deleteItem(i){
     console.log(i);
 
-    // orderList = orderList.filter(function(el, index ) {
-    //     return index !=i;
-    // });
-
     let newOrderList = [];
     if(window.confirm("Are you sure ?")){
-    for(let index = 0; index < orderList.length; index++){
-            if(index != i){
-                newOrderList.push(orderList[index])
-            }
+        for(let index = 0; index < orderList.length; index++){
+                if(index != i){
+                    newOrderList.push(orderList[index])
+                }
     }
     orderList = newOrderList;
-
-    // orderlist=orderList.splice(index,1);
 
     $('.overlay').hide();
     $('.orderItems').html(insertOrderItems(orderList));
@@ -271,17 +275,34 @@ function deleteItem(i){
     }
 }
 
+//===================================================================
+
+
+
+
+
+/**When clicking the cancel button, the orderList global variable is emptied 
+ * and pushed into the order list page element along with the new total. */
+
 $('.aside').on('click','.cancelOrder',function(){
 
     if(window.confirm("Are you sure ?")){
         orderList = [];
         $('.orderItems').html(insertOrderItems(orderList));
         $('.totalOutput').html( '£'+ calculateTotal(orderList));
+        resetOrderType();
     }
 });
+//=======================================================================
 
 
 
+
+
+
+/**
+ * Generates a modal template for order completion 
+ */
 function modal_Container(){
 
     var template = 
@@ -326,17 +347,32 @@ function modal_Container(){
 
     return template  
 }
+//==============End of editOrderModal===========================================
 
 
+
+
+ /**
+  * When clicking complete order, the modal is generated and the 
+  *  total value is inserted into the total div.
+  */
 $('.aside').on('click','.completeOrder',function(){
 
     $('.modal').html(modal_Container());
     $('.overlay').show();
     $('#totalCost').html('Total'+ ' ' + '£' + calculateTotal(orderList));
 });
+//============================================================================
 
 
 
+
+
+/**
+ * Checks the orderType global variable and return the apropriate buttons based on it's value.
+ * 
+ * @param {*} data 
+ */
 function checkOrderType(data){
     
     
@@ -360,11 +396,18 @@ $('.modal').on('click','#orderType',function(){
     orderType=$(this).data('value');
     $(".l1").html( checkOrderType(orderType));
 })
+//============================================================================
 
 
 
 
 
+
+/**
+ * Template for payment type button styles.
+ * 
+ * @param {*} paymentType 
+ */
 function checkPaymentType(paymentType){
     
     if( paymentType == 'cash' ) {
@@ -381,9 +424,14 @@ function checkPaymentType(paymentType){
 
 
 }
+//============================================================================
 
 
 
+/**
+ * Highlights the payment type button clicked and sets 
+ * the value of the global payment type variable
+ */
 $('.modal').on('click','#card',function(){
      
     paymentType = $('#card').data('value');
@@ -395,18 +443,50 @@ $('.modal').on('click','#cash',function(){
         
     paymentType = $('#cash').data('value');
     checkPaymentType(paymentType);
-  
+    $('.l3 input').focus();
+
 });
 
+$('.modal').on('focus', '.l3 input', function(){
+    $('#cash').trigger('click');
+})
+
+//============================================================================
 
 
 
+/**
+ * Calculates the amount of change to give back to customer if paying in cash
+ * @param {*} input 
+ */
 function calculateChange(input){
     let total = calculateTotal(orderList);
     if(paymentType == 'cash'){
         let cash = input.val();
         let changeLeft = '£' + parseFloat(cash - total).toFixed(2);
-        console.log(changeLeft)
-        $("#changeLeft").html(changeLeft)
+        console.log(changeLeft);
+        $("#changeLeft").html(changeLeft);
     }
+};
+//============================================================================
+
+$('.orderType button').click(function(){
+
+    
+    orderType = $(this).data('value');
+
+    $('.orderType button').removeClass('orderTypeSelected').addClass('orderTypeUnselected');
+
+    $(this).removeClass('orderTypeUnselected');
+    $(this).addClass('orderTypeSelected');
+
+})
+
+function resetOrderType(){
+
+    orderType='in'
+    
+    $('.orderType button').removeClass('orderTypeSelected').addClass('orderTypeUnselected')
+    $('.orderType button[data-value="in"').removeClass('orderTypeUnselected').addClass('orderTypeSelected')
+
 }
