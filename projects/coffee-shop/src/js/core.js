@@ -341,7 +341,7 @@ function modal_Container(){
             </div>
             
             <div class="bottom">
-                <button>Pay</button>
+                <button onclick="generateReceipt()">Pay</button>
             </div>
     
         </div> `
@@ -509,3 +509,63 @@ function calcOrderListHeight(){
     }
 }
 
+
+
+function receiptTemplate(){
+
+
+    let receiptTemplate =`
+        
+        <div class="receiptContainer">
+                <div id="shopDetails">
+                    <div class="header">
+                        
+                    <h3 style="text-align: center;margin:0px;padding:0px;">Coffee Shop Inc</h3>
+                    <hr>
+                    <strong># 14315141341343</strong>
+                    <br>
+                    <div class="date">19 Nov 2020 10:30</div>
+                    </div>
+                </div>
+
+                <div class="middle">
+                ====== Items ======
+                    <div class="receiptItems">
+                    </div>                
+                </div>
+                <hr>
+                <div id="footer">
+                    <p><strong>Thank you for your business! </strong>  
+                    </p>
+                    <strong>Contact Info</strong>
+                    <div>
+                        Address : street city, county</br>
+                        Email   : lifeiscoffee@coffeeshop.co.uk</br>
+                        Phone   : 0101 3940 3020</br>
+                    </div>
+                </div>
+            </div>
+`
+
+
+
+    return receiptTemplate
+}
+
+
+function generateReceipt(){
+
+    $(".modal").html(receiptTemplate());
+
+    for (let index = 0; index < orderList.length; index++) {
+        let name = orderList[index].item;
+        let price = orderList[index].price;
+        let qty = orderList[index].qty;
+        let item =`<p> ${name} ${price*qty} </p`
+        $('.receiptItems').append(item);
+    }
+    
+    window.print();
+    window.location.reload();
+
+}

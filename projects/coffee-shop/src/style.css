@@ -25,7 +25,7 @@ h2{
 }
 
 .items{
-    width:60%;
+    width:65%;
     height:100%;
     display:flex;
     flex-wrap: wrap;
@@ -54,7 +54,7 @@ h2{
 
 
 .aside{
-    width:40%;
+    width:30%;
     height:100%;
     padding-top:1rem;
     padding-left:5px;  
@@ -96,6 +96,7 @@ h2{
     height:70%;
     border-bottom: 1px solid white;
     text-align: center;
+    border-radius:2px;
     
 }
 .orderItemsScrollable{
@@ -112,6 +113,7 @@ h2{
     display: flex;
     justify-content: space-between;
     align-items: center;
+    border-radius:2px;
 
 }
 
@@ -139,14 +141,16 @@ h2{
 }
 
 .orderButton{
-    width:50%;
+    width:48%;
     height:50px;
-    margin-right:3px;
+    margin-right:5px;
     background: none;
     color: white;
     border:1px solid white;
     border-radius: 2px;
-    margin-bottom: 5px;
+    margin-bottom:20px;
+    /* border-radius:3px; */
+   
 }
 
 .totalOutput{
@@ -192,6 +196,7 @@ h2{
     margin-left:10px;
     text-align: center;
     padding: 1rem;
+    border-radius:3px;
     
 }
 
@@ -286,13 +291,14 @@ h2{
     
 }
 
-  .editOrderButtons{
+.editOrderButtons{
     display:flex;
     justify-content:space-around;
     
-  }
+    
+}
 
-  .orderSaveBtn{
+.orderSaveBtn{
     background:  #00c4a7;
     -webkit-transition: 0.2s;
     border:none;
@@ -497,3 +503,59 @@ h2{
 ::-webkit-scrollbar-thumb:hover {
   background: #555; 
 }
+
+
+
+
+
+
+/**============= Receipt style ========================**/
+
+
+.receiptContainer{
+  width:250px;
+  margin:0px;
+  padding:0px;
+}
+
+.logoPlaceholder{
+  width:100px;
+  height:100px;
+  background-color:red;
+}
+
+.receiptTable{    
+  width:100%;
+}
+
+.receiptItems{
+  width:100%;
+}
+
+/**============= Receipt end ========================**/
+
+
+
+/**============= Receipt Print ========================**/
+
+
+@media print{
+  .container{
+    display:none;
+  }
+  .closeModal{
+    display:none;
+  }
+  .overlay{
+    display:unset;
+  }
+  .modal{
+    margin:0;
+    padding-left:30px;
+    background-color: none;
+    color:black;
+    overflow: scroll;
+  }
+}
+
+/**============= Receipt Print End ========================**/

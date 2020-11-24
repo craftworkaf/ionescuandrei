@@ -28,32 +28,32 @@ var stock = {
     ],
     "food":[
         {
-            "item" : "Panini With ham",
+            "item" : "Panini with ham",
             "description" : "Salami , Onion , Cheese , Eggs",
             "price":3.90
         },
         {
-            "item" : "Panini With Salt",
+            "item" : "Panini with Salt",
             "description" : "Salt , Onion , Cheese , Eggs",
             "price":3.90
         },
         {
-            "item" : "Panini With Honey",
+            "item" : "Panini with Honey",
             "description" : "Honey , Onion , Cheese , Eggs",
             "price":3.90
         },
         {
-            "item" : "Panini With apples",
+            "item" : "Panini with apples",
             "description" : "Salami , Onion , Cheese , Eggs",
             "price":3.90
         },
         {
-            "item" : "Panini With onions",
+            "item" : "Panini with onions",
             "description" : "Salt , Onion , Cheese , Eggs",
             "price":3.90
         },
         {
-            "item" : "Panini With mrc",
+            "item" : "Panini with mrc",
             "description" : "Honey , Onion , Cheese , Eggs",
             "price":3.90
         }
