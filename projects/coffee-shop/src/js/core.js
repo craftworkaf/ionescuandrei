@@ -225,7 +225,7 @@ function insertOrderItems(orders = []){
 
     for (let index = 0; index < orders.length; index++) {
         const item = orders[index];
-        template+= `<div class="orderItem ${item.comment?'commented':''}"  data-index=${index} ><span class="mleft">${item.item}</span> <span>Qty: ${Number(item.qty)}</span> <span class="mright font20">£ ${item.price}</span> </div>`;
+        template+= `<div class="orderItem ${item.comment?'commented':''}"  data-index=${index} ><span class="mleft">${item.item}</span> <span>Qty: ${Number(item.qty)}</span> <span class="mright font20">£ ${parseFloat(item.price*item.qty).toPrecision(3)}</span> </div>`;
 
     }
     return template;
@@ -287,12 +287,20 @@ function deleteItem(i){
 
 $('.aside').on('click','.cancelOrder',function(){
 
-    if(window.confirm("Are you sure ?")){
-        orderList = [];
-        $('.orderItems').html(insertOrderItems(orderList));
-        $('.totalOutput').html( '£'+ calculateTotal(orderList));
-        resetOrderType();
-    }
+//    if(orderList == []){
+//        alert("nothing ordered")
+//    }
+   
+//    if(orderList !==[]){=======================================
+//        alert("something ordered")
+//    }
+    // if(window.confirm("Are you sure ?")){
+    //         orderList = [];
+    //         $('.orderItems').html(insertOrderItems(orderList));
+    //         $('.totalOutput').html( '£'+ calculateTotal(orderList));
+    //         resetOrderType();
+    //     }
+    
 });
 //=======================================================================
 
@@ -320,7 +328,7 @@ function modal_Container(){
                     </div>
                     <div class="l3">
                         <h4>Ammount</h4>
-                        <input type="number" step=".01" oninput="calculateChange($(this))">
+                        <input id="changeInput" type="number" step=".01" oninput="calculateChange($(this))">
                     </div>
                 </div>
             
@@ -375,9 +383,6 @@ $('.aside').on('click','.completeOrder',function(){
  * @param {*} data 
  */
 function checkOrderType(data){
-    
-    
-
     if(data == 'in') {
         return `<button id="orderType" data-value="in" style="background-color:white; color:black">In</button>
                 <button id="orderType" data-value="out" style="background-color:none; color:white">Out</button>
@@ -402,8 +407,6 @@ $('.modal').on('click','#orderType',function(){
 
 
 
-
-
 /**
  * Template for payment type button styles.
  * 
@@ -413,17 +416,16 @@ function checkPaymentType(paymentType){
     
     if( paymentType == 'cash' ) {
 
-        $('#cash').css({"background":"white","color":"black"})
-        $('#card').css({"background":"none","color":"white"})
+        $('#cash').css({"background":"white","color":"black"});
+        $('#card').css({"background":"none","color":"white"});
         
     }else if( paymentType == 'card' ){
 
-        $('#cash').css({"background":"none","color":"white"})
-        $('#card').css({"background":"white","color":"black"})
-
+        $('#cash').css({"background":"none","color":"white"});
+        $('#card').css({"background":"white","color":"black"});
+        $('#changeInput').val("");
+        $('#changeLeft').html("");
     }
-
-
 }
 //============================================================================
 
@@ -434,21 +436,20 @@ function checkPaymentType(paymentType){
  * the value of the global payment type variable
  */
 $('.modal').on('click','#card',function(){
-     
+    
     paymentType = $('#card').data('value');
     checkPaymentType(paymentType);
-  
 });
 
 $('.modal').on('click','#cash',function(){
-        
+ 
     paymentType = $('#cash').data('value');
     checkPaymentType(paymentType);
     $('.l3 input').focus();
 
 });
 
-$('.modal').on('focus', '.l3 input', function(){
+$('.modal').on('click', '#changeInput', function(){
     $('#cash').trigger('click');
 })
 
@@ -465,10 +466,9 @@ function calculateChange(input){
     if(paymentType == 'cash'){
         let cash = input.val();
         let changeLeft = '£' + parseFloat(cash - total).toFixed(2);
-        console.log(changeLeft);
         $("#changeLeft").html(changeLeft);
     }
-};
+}
 //============================================================================
 
 
@@ -510,7 +510,9 @@ function calcOrderListHeight(){
 }
 
 
-
+/**
+ *  Generates receipt html template
+ */
 function receiptTemplate(){
 
 
