@@ -159,7 +159,7 @@ $('.modal').on('click','.product',function(){
 
     $('.orderItems').html(insertOrderItems(orderList));
     $('.totalOutput').html( '£'+ calculateTotal(orderList));
-    calcOrderListHeight()
+    calcOrderListHeight();
 });
 
 //=====================================================
@@ -183,7 +183,7 @@ $(document).keyup(function(e){
 $('.closeModal').click(function(){
 
     $('.overlay').hide();
-
+    setType();
 })
 
 
@@ -200,16 +200,31 @@ $('.closeModal').click(function(){
  * @param {*} param 
  */
 function calculateTotal(param=[]){
-
     let total = 0;
-
     for (let index = 0; index < param.length; index++) {
         const element = param[index];
         total += element.price*element.qty;
-    }
+        }
+        if(total % 1 != 0){
+            return total.toFixed(2);
+          }else{
+              return total
 
-    return total.toFixed(2);
+    }
 }
+
+
+
+function calculateSubTotal(price,qty){
+    let subTotal = price * qty
+    if(subTotal % 1 != 0){
+        parseFloat(subTotal).toPrecision(3);
+        return subTotal.toFixed(2);
+    }else{
+        return subTotal
+    }
+}
+
 //==============================
 
 
@@ -225,14 +240,14 @@ function insertOrderItems(orders = []){
 
     for (let index = 0; index < orders.length; index++) {
         const item = orders[index];
-        template+= `<div class="orderItem ${item.comment?'commented':''}"  data-index=${index} ><span class="mleft">${item.item}</span> <span>Qty: ${Number(item.qty)}</span> <span class="mright font20">£ ${parseFloat(item.price*item.qty).toPrecision(3)}</span> </div>`;
+        template+= `<div class="orderItem ${item.comment?'commented':''}"  data-index=${index} ><span class="mleft">${item.item}</span> <span>Qty: ${Number(item.qty)}</span> <span class="mright font20">£ ${calculateSubTotal(item.price,item.qty)}</span> </div>`;
 
     }
     return template;
 }
 
 
-//======================================================
+//===================================================================================================================================
 
 
 
@@ -287,19 +302,17 @@ function deleteItem(i){
 
 $('.aside').on('click','.cancelOrder',function(){
 
-//    if(orderList == []){
-//        alert("nothing ordered")
-//    }
+   if(orderList.length === 0){
+       alert("nothing ordered");
+   }
    
-//    if(orderList !==[]){=======================================
-//        alert("something ordered")
-//    }
-    // if(window.confirm("Are you sure ?")){
-    //         orderList = [];
-    //         $('.orderItems').html(insertOrderItems(orderList));
-    //         $('.totalOutput').html( '£'+ calculateTotal(orderList));
-    //         resetOrderType();
-    //     }
+   if(orderList.length !== 0 && window.confirm("Are you sure ?")){
+       
+       orderList = [];
+       $('.orderItems').html(insertOrderItems(orderList));
+       $('.totalOutput').html( '£'+ calculateTotal(orderList));
+       resetOrderType();
+   }
     
 });
 //=======================================================================
@@ -319,7 +332,7 @@ function modal_Container(){
     
             <div class="top">
                 <div class="left">
-                    <div class="l1">
+                    <div class="l1 ">
                         ${checkOrderType(orderType)}
                     </div>
                     <div class="l2">
@@ -366,10 +379,13 @@ function modal_Container(){
   *  total value is inserted into the total div.
   */
 $('.aside').on('click','.completeOrder',function(){
-
-    $('.modal').html(modal_Container());
-    $('.overlay').show();
-    $('#totalCost').html('Total'+ ' ' + '£' + calculateTotal(orderList));
+    if(orderList.length !==0){
+        $('.modal').html(modal_Container());
+        $('.overlay').show();
+        $('#totalCost').html('Total'+ ' ' + '£' + calculateTotal(orderList));
+    }else{
+        alert("Nothing ordered")
+    }
 });
 //============================================================================
 
@@ -385,15 +401,15 @@ $('.aside').on('click','.completeOrder',function(){
 function checkOrderType(data){
     if(data == 'in') {
         return `<button id="orderType" data-value="in" style="background-color:white; color:black">In</button>
-                <button id="orderType" data-value="out" style="background-color:none; color:white">Out</button>
+                <button id="orderType" data-value="out" style="background-color:none; color:white">To go</button>
                 <button id="orderType" data-value="delivery" style="background-color:none; color:white">Delivery</button>`
     }else if(data == 'out'){
         return `<button id="orderType" data-value="in" style="background-color:none; color:white">In</button>
-                <button id="orderType" data-value="out" style="background-color:white; color:black">Out</button>
+                <button id="orderType" data-value="out" style="background-color:white; color:black">To go</button>
                 <button id="orderType" data-value="delivery" style="background-color:none; color:white">Delivery</button>`
     }else if(data=='delivery') {
        return  `<button id="orderType" data-value="in" style="background-color:none; color:white">In</button>
-                <button id="orderType" data-value="out" style="background-color:none; color:white">Out</button>
+                <button id="orderType" data-value="out" style="background-color:none; color:white">To go</button>
                 <button id="orderType" data-value="delivery" style="background-color:white; color:black">Delivery</button>`
     }
 }
@@ -479,11 +495,32 @@ $('.orderType button').click(function(){
 
     
     orderType = $(this).data('value');
-    $('.orderType button').removeClass('orderTypeSelected').addClass('orderTypeUnselected');
-    $(this).removeClass('orderTypeUnselected');
-    $(this).addClass('orderTypeSelected');
-
+    setType()
+   
 })
+
+
+
+
+/**
+ * 
+ */
+function setType(){
+    // 
+    let buttons = $('.orderType button')
+    console.log(buttons)
+    
+    for( let index = 0; index < buttons.length; index++){
+        let el = buttons[index]
+        // console.log(el);
+        if($(el).data('value') == orderType){
+            
+            $('.orderType button').removeClass('orderTypeSelected').addClass('orderTypeUnselected');
+            $(el).removeClass('orderTypeUnselected');
+            $(el).addClass('orderTypeSelected');
+        }
+    }
+}
 
 
 /**
@@ -496,6 +533,9 @@ function resetOrderType(){
     $('.orderType button[data-value="in"').removeClass('orderTypeUnselected').addClass('orderTypeSelected')
 
 }
+
+
+
 
 
 function calcOrderListHeight(){

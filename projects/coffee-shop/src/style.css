@@ -67,10 +67,11 @@ h2{
 }
 
 .orderType{
-    height:10%;
+    height:auto;
     border-bottom: 1px solid white;
     text-align: center;
     padding-top: 5px;
+    padding-bottom: 5px;
 }
 
 .orderType button{
@@ -92,7 +93,6 @@ h2{
 }
 
 .orderItems{
-    height:auto;
     height:70%;
     border-bottom: 1px solid white;
     text-align: center;
@@ -503,6 +503,44 @@ h2{
 ::-webkit-scrollbar-thumb:hover {
   background: #555; 
 }
+
+
+
+
+
+@media only screen and (max-height: 600px) {
+
+  .aside{
+    width:30%;
+    height:100%;
+    padding-top:0.2rem;
+    padding-left:5px;  
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    padding-right:1.5rem;
+  }
+
+
+  .orderType button{
+    width:30%;
+    height:50px;
+    margin-right:3px;
+    margin-bottom:1px;
+    border:1px solid white;
+    border-radius: 2px;
+    
+  }
+
+  .orderItems{
+    height:50%;
+  }
+  .totalContainer{
+    height:20%;
+  }
+
+}
+
 
 
 
